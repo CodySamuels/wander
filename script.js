@@ -30,6 +30,6 @@ function queryHikingProjectDataAPI() {
 // FUNCTIONS
 function getRandomTrail() {
     var randomNum = ""
-    randomNum = Math.floor(Math.random() * 101)
+    randomNum = Math.floor(Math.random() * userParameters.maxResults[1] +1)
     console.log(HikingProjectAPIDataObject.trails[randomNum])
 }
