@@ -9,6 +9,10 @@ var userParameters = {
     minLength: ["&minLength=", ""],
     minStars: ["&minStars=", ""]
 };
+var randomTrailObject = {}
+var lat = ""
+var long = ""
+
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -32,5 +36,7 @@ function queryHikingProjectDataAPI() {
 function getRandomTrail() {
     var randomNum = ""
     randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
-    console.log(HikingProjectAPIDataObject.trails[randomNum])
+    randomTrailObject = HikingProjectAPIDataObject.trails[randomNum]
+    lat = (randomTrailObject.longitude)
+    long = (randomTrailObject.latitude)
 }
