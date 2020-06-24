@@ -8,8 +8,7 @@
   <title>Foundation for Sites</title>
   
   <!-- FOUNDATION CSS -->
-  <link rel="stylesheet" href="css/foundation.css">
-  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 <!-- OUR CUSTOM CSS -->
 <link rel="stylesheet" href="style.css">
@@ -17,21 +16,33 @@
 </head>
 
 <body>
+<div class="container">
+  <h1 class="container center-align">WANDER</h1>
 
-  <h1 class="text-center">WANDER</h1>
-
-
-  <div class="row small-12 large-12 callout radius">
-    <div class="small-12 large-2 columns"></div>
-    <div class="small-12 large-4 columns text-center"><a href="random.html" class="button large radius expand">I like surprises</a></div>
-    <div class="small-12 large-4 columns text-center"><a href="list.html" class="button large radius expand">I like options</a></div>
-    <div class="small-12 large-2 columns"></div>
+  <!--needs to span full width, space buttons, and to be centered in the middle of the page-->
+  <div class="container">
+    <div class="row center-align">
+        <div class="col s12">
+          <p> <a class="waves-effect waves-light btn-large" href="random.html">I like surprises</a>
+          <a class="waves-effect waves-light btn-large" href="list.html">I like options</a></p>
+      </div>
+    </div>
   </div>
+
+
+  <!--needs fixed bottom of page-->
+  <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container">
+              © 2020 Team TECA
+        </div>
+      </div>
+  </footer>
+
+</div>
   <!-- FOUNDATION JS -->
-  <script src="js/vendor/jquery.js"></script>
-  <script src="js/vendor/what-input.js"></script>
-  <script src="js/vendor/foundation.js"></script>
-  <script src="js/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 
   <!-- OUR JS -->
   <script src="script.js"></script>
