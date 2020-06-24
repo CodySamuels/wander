@@ -1,3 +1,8 @@
+
+
+console.log("Hello World!")
+
+
 // we want a random hike generated, 
 // Then recieve hike input/ first api call from var randomHike .
 // then we want the weather API to grab hikes lat and lon information 
@@ -8,8 +13,15 @@
 
 // GLOBAL VARIABLE & OJBJECTS
 
+
 var hikingProjectAPIDataObject = {}
 var weatherForecastObject = {}
+
+var APIkey = "4af87ee91531ff09b1ce9e3392587b3a"
+var weatherQuery = `https://api.openweathermap.org/data/2.5/forecast?q=seattle&units=imperial&appid=${APIkey}`;
+
+var HikingProjectAPIDataObject = {}
+
 var userParameters = {
     latitude: ["lat=", "47.6062"],
     longitude: ["&lon=", "-122.3321"],
@@ -52,6 +64,7 @@ function getRandomTrail() {
     console.log(HikingProjectAPIDataObject.trails[randomNum])
 }
 
+
 // //  AJAX FUNCTION FOR WEATHER LAT LON QUERY---STILL NEED TO INTEGRATE WITH HIKING PROJECT DATA API
 
 // function weatherLocation() {
@@ -79,13 +92,43 @@ function sixHourForecast() {
 
     $.ajax({
         url: queryURL,
+
+//  AJAX FUNCTION FOR WEATHER LAT LON QUERY---STILL NEED TO INTEGRATE WITH HIKING PROJECT DATA API
+
+function weatherLocation() {
+    $.ajax({
+        url: weatherQuery,
+        method: "GET"
+    })
+        .then(function (weatherCoord) {
+            console.log(weatherCoord)
+
+            var trailLat = weatherCoord.city.coord.lat;
+            var trailLon = weatherCoord.city.coord.lon
+
+            weatherQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${trailLat}&lon=${trailLon}&
+exclude=minutely&appid=${APIkey}`
+
+        })
+}
+// 6 HOUR FORECAST USING THE CURRENT TIME. SPLIT INTO 3 TWO HOUR BLOCKS. 
+// HOW DO GET THE CALL TO RECOGNIZE CURRENT TIME AND THEN DISPLAY THE FOLLOWING 6 HOURS?
+
+
+function sixHourForecast() {
+    $.ajax({
+        url: weatherQuery,
+
         method: "GET"
 
     })
         // TWO HOUR TIME BLOCKS WILL BE LOOKED AT OVER A 6 HOUR TIME PERIOD
         .then(function (twoHourBlock) {
 
+
             weatherForecastObject = twoHourBlock
+
+
             var twoHour = []
 
             for (var i = 0; i < twoHourBlock.list.length; i++) {
