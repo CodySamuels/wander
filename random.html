@@ -8,6 +8,7 @@
     <!-- MATERIALIZE CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -19,14 +20,19 @@
                     class="small material-icons">home</i>Keep WANDERing</a>
         </div>
     </nav>
-    <div class="row">
+    <div class="animate__animated animate__fadeIn row">
         <div class="col s12">
             <h1 class="center-align" id="hikeName">Placeholder</h1>
         </div>
     </div>
+    <div class="animate__animated animate_fadeIn random row">
+        <div class="valign-wrapper col s12">
+            <h5 id="hikeDescription">Placeholder</h5>
+        </div>
+    </div>
     <main class="welcomeContainer container">
         <!--make this into it's own container with flex display for spacing-->
-        <div class="random row">
+        <div class="animate__animated animate__fadeIn random row">
             <div class="valign-wrapper col s6">
                 <!--specific hike info-->
                 <ul id="hikeInfo" class="collection">
@@ -38,7 +44,7 @@
                 </ul>
             </div>
             <div class="valign-wrapper col s6">
-                <!--specific hike map-->
+                <!--specific hike map (materialboxed class to make zoomable image-->
                 <img src="http://placekitten.com/300/300" id="hikeMap" class="responsive-img circle">
             </div>
         </div>
@@ -47,11 +53,9 @@
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
     <footer class="page-footer transparent">
         <div class="container footerSpacing">
-            <a class="grey-text text-lighten-3 right" href="https://www.wta.org/">WTA</a>
             <a class="grey-text text-lighten-3 right" href="https://www.alltrails.com/">AllTrails</a>
             © 2020 Team TECA
             <a class="grey-text text-lighten-3 right" href="https://www.noaa.gov/weather">NOAA</a>
-            <a class="grey-text text-lighten-3 right" href="https://www.google.com/maps/">Google Maps</a>
         </div>
     </footer>
     <!-- JAVASCRIPT -->

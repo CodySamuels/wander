@@ -8,6 +8,7 @@
   <!-- MATERIALIZE CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
   <!-- CUSTOM CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,13 +23,13 @@
       </nav>
   <div class="container">
     <!--needs padding, will be the map with pins-->
-    <div class="row center-align listImage">
+    <div class="animate__animated animate__fadeIn row center-align listImage">
       <div class="col s12">
-      <img src="http://placekitten.com/500/500" id="hikeMap" class="responsive-img circle">
+      <img src="http://placekitten.com/500/500" id="hikeMap" class="responsive-img circle"> <!--materialboxed class for zoomable???-->
       </div>
     </div>
     <!--search results, link to details page (random page html with click function)-->
-    <div class="row">
+    <div class="animate__animated animate__fadeIn row">
       <div class="collection">
         <a href="#!" class="collection-item">result 1</a>
         <a href="#!" class="collection-item">result 2</a>
@@ -46,11 +47,9 @@
   <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
   <footer class="page-footer transparent">
     <div class="container footerSpacing">
-        <a class="grey-text text-lighten-3 right" href="https://www.wta.org/">WTA</a>
         <a class="grey-text text-lighten-3 right" href="https://www.alltrails.com/">AllTrails</a>
         © 2020 Team TECA
         <a class="grey-text text-lighten-3 right" href="https://www.noaa.gov/weather">NOAA</a>
-        <a class="grey-text text-lighten-3 right" href="https://www.google.com/maps/">Google Maps</a>
     </div>
 </footer>
   <!-- JAVASCRIPT -->
