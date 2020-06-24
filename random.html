@@ -10,54 +10,65 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
           <!-- FOUNDATION CSS -->
-        <link rel="stylesheet" href="css/foundation.css">
-        <link rel="stylesheet" href="css/app.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <!--Top nav bar-->
-        <nav class="top-bar" data-topbar role="navigation">
-                <h5><a href="index.html">Keep WANDERing</a></h5>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="index.html" class="brand-logo">Keep WANDERing</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+            </div>
           </nav>
-          
-          
-       <h1 id="hikeName">Placeholder</h1>
         
+    <div class="container">
+          
+        <div class="row">
+            <div class="col s12">
+                <h1 class="center-align" id="hikeName">Placeholder</h1>
+            </div>
+        </div>
+        <!--make this into it's own container with flex display for spacing-->
+        <div class="container">
+            <div class="row">
+                <div class="col s6">
+                    <!--specific hike info-->
+                    <ul class="collection">
+                        <li id="difficulty" class="collection-item">difficulty placeholder</li>
+                        <li id="length" class="collection-item">length placeholder</li>
+                        <li id="weather" class="collection-item">weather placeholder</li>
+                        <li id="trailConditions" class="collection-item">trail conditions placeholder</li>
+                        <li id="elevationGain" class="collection-item">elevation gain placeholder</li>
+                    </ul>
+                </div>
+                <div class="col s6">
+                    <!--specific hike map-->
+                    <img src="http://placekitten.com/300/300" id="hikeMap" class="circle">
+                </div>
+            </div>
+        </div>
+        
+        <!--Bottom nav with links to additional info, needs to span page and be fixed bottom-->
+        <footer class="page-footer">
+            <div class="footer-copyright">
+              <div class="container">
+              © 2020 Team TECA
+              <a class="grey-text text-lighten-4 right" href="#!">WTA</a>
+              <a class="grey-text text-lighten-4 right" href="#!">AllTrails</a>
+              <a class="grey-text text-lighten-4 right" href="#!">NOAA</a>
+              <a class="grey-text text-lighten-4 right" href="#!">Google Maps</a>
+              </div>
+            </div>
+          </footer>
 
 
 
 
-
-
-
-    <!--bottom icon bar-->
-    <div class="icon-bar five-up">
-        <a class="item">
-          <img src="../assets/img/images/fi-home.svg" >
-          <label>Home</label>
-        </a>
-        <a class="item">
-          <img src="../assets/img/images/fi-bookmark.svg" >
-          <label>WTA</label>
-        </a>
-        <a class="item">
-          <img src="../assets/img/images/fi-info.svg" >
-          <label>AllTrails</label>
-        </a>
-        <a class="item">
-          <img src="../assets/img/images/fi-mail.svg" >
-          <label>Weather</label>
-        </a>
-        <a class="item">
-          <img src="../assets/img/images/fi-like.svg" >
-          <label>Directions</label>
-        </a>
-      </div>
+    </div>
         <!-- FOUNDATION JS -->
-  <script src="js/vendor/jquery.js"></script>
-  <script src="js/vendor/what-input.js"></script>
-  <script src="js/vendor/foundation.js"></script>
-  <script src="js/app.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 
   <!-- OUR JS -->
   <script src="script.js"></script>
