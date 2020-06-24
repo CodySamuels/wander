@@ -5,14 +5,19 @@ var weatherQuery = `https://api.openweathermap.org/data/2.5/forecast?q=seattle&u
 
 
 // we want a random hike generated, 
-// Then recieve hike input from var randomHike .
+// Then recieve hike input/ first api call from var randomHike .
 // then we want the weather API to grab hikes lat and lon information 
 // After weather API gathers lat and lon, 
 // then display 6 hour forecast broken up into 3 displays
 // Display .sunrise, .sunset, .Temp, .Wind, .Description 
 
 
-// ajax call for One-Call-API: weather data
+
+
+
+
+
+// ajax lat & lon call for One-Call-API: weather data
 $.ajax({
     url: weatherQuery,
     method: "GET"
@@ -28,3 +33,4 @@ exclude=minutely&appid=${APIkey}`
 
 
 })
+
