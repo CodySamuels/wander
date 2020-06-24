@@ -20,7 +20,8 @@ var userParameters = {
     maxResults: ["&maxResults=", "100"],
     sort: ["&sort=", "quality", "distance"],
     minLength: ["&minLength=", ""],
-    minStars: ["&minStars=", ""]};
+    minStars: ["&minStars=", ""]
+};
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -43,44 +44,49 @@ function queryHikingProjectDataAPI() {
 // FUNCTIONS
 function getRandomTrail() {
     var randomNum = ""
-    randomNum = Math.floor(Math.random() * userParameters.maxResults[1] +1)
+    randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
     console.log(HikingProjectAPIDataObject.trails[randomNum])
 }
 
 //  AJAX FUNCTION FOR WEATHER LAT LON QUERY---STILL NEED TO INTEGRATE WITH HIKING PROJECT DATA API
-$.ajax({
-    url: weatherQuery,
-    method: "GET"
-})
-.then(function(weatherCoord){
-console.log(weatherCoord)
 
-var trailLat = weatherCoord.city.coord.lat;
-var trailLon = weatherCoord.city.coord.lon
+function weatherLocation() {
+    $.ajax({
+        url: weatherQuery,
+        method: "GET"
+    })
+        .then(function (weatherCoord) {
+            console.log(weatherCoord)
 
-weatherQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${trailLat}&lon=${trailLon}&
+            var trailLat = weatherCoord.city.coord.lat;
+            var trailLon = weatherCoord.city.coord.lon
+
+            weatherQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${trailLat}&lon=${trailLon}&
 exclude=minutely&appid=${APIkey}`
 
-
-
-})
-
+        })
+}
 // 6 HOUR FORECAST USING THE CURRENT TIME. SPLIT INTO 3 TWO HOUR BLOCKS. 
 // HOW DO GET THE CALL TO RECOGNIZE CURRENT TIME AND THEN DISPLAY THE FOLLOWING 6 HOURS?
-$.ajax({
-    url: weatherQuery,
-    method: "GET"
-    
-})
-.then(function(threeHourFrcst){
 
-    var threeHour =[]
 
-    for (var i = 0; i < threeHourFrcst.list.length; i++){
-       
-        if(threeHourFrcst.list[i].dt_txt.indexOf("12:00:00")!== -1){
-            console.log(threeHourFrcst.list[i])
-        }
-    
-    }
-})
+function sixHourForecast() {
+    $.ajax({
+        url: weatherQuery,
+        method: "GET"
+
+    })
+        // TWO HOUR TIME BLOCKS WILL BE LOOKED AT OVER A 6 HOUR TIME PERIOD
+        .then(function (twoHourBlock) {
+
+            var twoHour = []
+
+            for (var i = 0; i < twoHourBlock.list.length; i++) {
+
+                if (twoHourBlock.list[i].dt_txt.indexOf("12:00:00") !== -1) {
+                    console.log(twoHourBlock.list[i])
+                }
+
+            }
+        })
+}
