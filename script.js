@@ -35,8 +35,8 @@ function queryHikingProjectDataAPI() {
         url: queryURL,
         method: "GET"
     })
-        .then(function (response) {
-            HikingProjectAPIDataObject = response
+        .then(function (hikingAPIResponse) {
+            HikingProjectAPIDataObject = hikingAPIResponse
             getRandomTrail()
         });
 }
