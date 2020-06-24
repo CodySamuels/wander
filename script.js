@@ -7,7 +7,8 @@ var userParameters = {
     maxResults: ["&maxResults=", "100"],
     sort: ["&sort=", "quality", "distance"],
     minLength: ["&minLength=", ""],
-    minStars: ["&minStars=", ""]};
+    minStars: ["&minStars=", ""]
+};
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -21,8 +22,8 @@ function queryHikingProjectDataAPI() {
         url: queryURL,
         method: "GET"
     })
-        .then(function (response) {
-            HikingProjectAPIDataObject = response
+        .then(function (hikingAPIResponse) {
+            HikingProjectAPIDataObject = hikingAPIResponse
             getRandomTrail()
         });
 }
@@ -30,6 +31,6 @@ function queryHikingProjectDataAPI() {
 // FUNCTIONS
 function getRandomTrail() {
     var randomNum = ""
-    randomNum = Math.floor(Math.random() * userParameters.maxResults[1] +1)
+    randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
     console.log(HikingProjectAPIDataObject.trails[randomNum])
 }
