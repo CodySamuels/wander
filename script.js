@@ -1,4 +1,7 @@
+
+
 console.log("Hello World!")
+
 
 // we want a random hike generated, 
 // Then recieve hike input/ first api call from var randomHike .
@@ -9,10 +12,16 @@ console.log("Hello World!")
 
 
 // GLOBAL VARIABLE & OJBJECTS
+
+
+var hikingProjectAPIDataObject = {}
+var weatherForecastObject = {}
+
 var APIkey = "4af87ee91531ff09b1ce9e3392587b3a"
 var weatherQuery = `https://api.openweathermap.org/data/2.5/forecast?q=seattle&units=imperial&appid=${APIkey}`;
 
 var HikingProjectAPIDataObject = {}
+
 var userParameters = {
     latitude: ["lat=", "47.6062"],
     longitude: ["&lon=", "-122.3321"],
@@ -22,6 +31,10 @@ var userParameters = {
     minLength: ["&minLength=", ""],
     minStars: ["&minStars=", ""]
 };
+var randomTrailObject = {}
+var lat = ""
+var long = ""
+
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -36,7 +49,7 @@ function queryHikingProjectDataAPI() {
         method: "GET"
     })
         .then(function (hikingAPIResponse) {
-            HikingProjectAPIDataObject = hikingAPIResponse
+            hikingProjectAPIDataObject = hikingAPIResponse
             getRandomTrail()
         });
 }
@@ -45,8 +58,40 @@ function queryHikingProjectDataAPI() {
 function getRandomTrail() {
     var randomNum = ""
     randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
+    randomTrailObject = HikingProjectAPIDataObject.trails[randomNum]
+    lat = (randomTrailObject.latitude)
+    long = (randomTrailObject.longitude)
     console.log(HikingProjectAPIDataObject.trails[randomNum])
 }
+
+
+// //  AJAX FUNCTION FOR WEATHER LAT LON QUERY---STILL NEED TO INTEGRATE WITH HIKING PROJECT DATA API
+
+// function weatherLocation() {
+//     $.ajax({
+//         url: weatherQuery,
+//         method: "GET"
+//     })
+//         .then(function (weatherCoord) {
+//             console.log(weatherCoord)
+
+//             var trailLat = weatherCoord.city.coord.lat;
+//             var trailLon = weatherCoord.city.coord.lon
+
+            // weatherQuery = `https://api.openweathermap.org/data/2.5/onecall?lat=${trailLat}&lon=${trailLon}&exclude=minutely&appid=${APIkey}`
+
+//         })
+// }
+// // 6 HOUR FORECAST USING THE CURRENT TIME. SPLIT INTO 3 TWO HOUR BLOCKS. 
+// // HOW DO GET THE CALL TO RECOGNIZE CURRENT TIME AND THEN DISPLAY THE FOLLOWING 6 HOURS?
+
+
+function sixHourForecast() {
+    var weatherAPIKey = "4af87ee91531ff09b1ce9e3392587b3a"
+    var queryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=${weatherAPIKey}`
+
+    $.ajax({
+        url: queryURL,
 
 //  AJAX FUNCTION FOR WEATHER LAT LON QUERY---STILL NEED TO INTEGRATE WITH HIKING PROJECT DATA API
 
@@ -73,11 +118,16 @@ exclude=minutely&appid=${APIkey}`
 function sixHourForecast() {
     $.ajax({
         url: weatherQuery,
+
         method: "GET"
 
     })
         // TWO HOUR TIME BLOCKS WILL BE LOOKED AT OVER A 6 HOUR TIME PERIOD
         .then(function (twoHourBlock) {
+
+
+            weatherForecastObject = twoHourBlock
+
 
             var twoHour = []
 
