@@ -15,30 +15,31 @@
 
 </head>
 
-<body>
+<body class="pageBody">
 
     <!--Top nav bar-->
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper lime lighten-1">
             <a href="index.html" class="brand-logo">Keep WANDERing</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
         </div>
     </nav>
 
-    <div class="container">
-
-        <div class="row">
-            <div class="col s12">
-                <h1 class="center-align" id="hikeName">Placeholder</h1>
-            </div>
+    <div class="row">
+        <div class="col s12">
+            <h1 class="center-align" id="hikeName">Placeholder</h1>
         </div>
+    </div>
 
+    <main class="s welcomeContainer container">
+
+        
         <!--make this into it's own container with flex display for spacing-->
-        <div class="container">
-            <div class="row">
-                <div class="col s6">
+        
+            <div class="random row">
+                <div class="valign-wrapper col s6">
                     <!--specific hike info-->
-                    <ul class="collection">
+                    <ul id="hikeInfo" class="collection">
                         <li id="difficulty" class="collection-item">difficulty placeholder</li>
                         <li id="length" class="collection-item">length placeholder</li>
                         <li id="weather" class="collection-item">weather placeholder</li>
@@ -46,18 +47,18 @@
                         <li id="elevationGain" class="collection-item">elevation gain placeholder</li>
                     </ul>
                 </div>
-                <div class="col s6">
+                <div class="valign-wrapper col s6">
 
                     <!--specific hike map-->
                     <img src="http://placekitten.com/300/300" id="hikeMap" class="circle">
                 </div>
             </div>
-        </div>
+        
     </div>
+    </main>
 
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
-    <footer class="page-footer">
-        <div class="footer-copyright">
+    <footer class="page-footer lime lighten-1">
             <div class="container">
                 © 2020 Team TECA
                 <a class="grey-text text-lighten-4 right" href="#!">WTA</a>
@@ -65,7 +66,6 @@
                 <a class="grey-text text-lighten-4 right" href="#!">NOAA</a>
                 <a class="grey-text text-lighten-4 right" href="#!">Google Maps</a>
             </div>
-        </div>
     </footer>
 
 
