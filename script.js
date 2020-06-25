@@ -88,14 +88,20 @@ function sixHourForecast() {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
 
+            
     
             for (var i = 0; i < twoHourBlock.hourly.length; i++) {
+
+                $("#weather").text("Temp F: "+ twoHourBlock.hourly[i].temp.toFixed())
+               
 
                 if (i % 2 !== 0 && i < 6) {
                     console.log(twoHourBlock.hourly[i].temp)
                     console.log(twoHourBlock.hourly[i].humidity)
                     // console.log(timeConverter(weatherForecastObject.current.sunrise))
                     // console.log(timeConverter(weatherForecastObject.current.sunset))
+
+                   
                   
                   
 
