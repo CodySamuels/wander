@@ -23,7 +23,7 @@ var map;
 var lat = ""
 var long = ""
 
- 
+
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -65,50 +65,51 @@ function initMap() {
     lat = randomTrailObject.latitude
     lng = randomTrailObject.longitude
     var loc = randomTrailObject.location
-    var sum = randomTrailObject.summary 
+    var sum = randomTrailObject.summary
     var con = randomTrailObject.conditionDetails
     var img = randomTrailObject.imgSqSmall
     var myLatLng = { lat, lng };
 
-      map = new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: lat, lng: lng },
         zoom: 12
-      });
-      var contentString = '<div id="content">' +
-      '<div id="siteNotice">' +
-      '</div>' +
-      '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
-      '<div id="bodyContent">' +
-      '<h1>'+loc+'</h1>' +
-      '<h2>'+sum+'</h2>'+
-      '<h3>'+ con + '</h3>' +  
-      '</div>' +
-      '</div>';
-      var infowindow = new google.maps.InfoWindow({
-          content: contentString})
-          var marker = new google.maps.Marker({
-              position: myLatLng,
-              map: map,
-            });
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
-            
-            //       console.log(randomTrailObject); 
-            
-            //       console.log(loc);
-            //       console.log(sum);
-            //       console.log(con);
-            //       console.log(response);
-            //       // $("#button").click(function () {
-                //       // })
-                //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
-                    //       zoom: 12,
-                    //       center: myLatLng
-                    //     });
-                    
-                    //  }); 
-                    // }
+    });
+    var contentString = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
+        '<div id="bodyContent">' +
+        '<h1>' + loc + '</h1>' +
+        '<h2>' + sum + '</h2>' +
+        '<h3>' + con + '</h3>' +
+        '</div>' +
+        '</div>';
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    })
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+    });
+    marker.addListener('click', function () {
+        infowindow.open(map, marker);
+    });
+
+    //       console.log(randomTrailObject); 
+
+    //       console.log(loc);
+    //       console.log(sum);
+    //       console.log(con);
+    //       console.log(response);
+    //       // $("#button").click(function () {
+    //       // })
+    //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
+    //       zoom: 12,
+    //       center: myLatLng
+    //     });
+
+    //  }); 
+    // }
 }
 
 // POPULATES THE RANDOM PAGE
@@ -186,22 +187,6 @@ function populateSelectionPage() {
 
 }
 
-// //TIME CONVERTER FUNCTION
-// function timeConverter(UNIX_timestamp) {
-//     var a = new Date(UNIX_timestamp * 1000);
-//     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//     var year = a.getFullYear();
-//     var month = months[a.getMonth()];
-//     var date = a.getDate();
-//     var hour = a.getHours();
-//     var min = a.getMinutes();
-//     var time = hour + ':' + min;
-//     return time;
-// }
-//   console.log(timeConverter(weatherForecastObject.current.sunrise));
-
-
-
 //  FORECAST FUNCTION
 function sixHourForecast() {
     var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
@@ -216,49 +201,43 @@ function sixHourForecast() {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
             var iconUrl = "http://openweathermap.org/img/w/" + twoHourBlock.current.weather[0].icon + ".png";
-            $("#weather").append("<ul class='sunrise'>" + "Sunrise: " + moment.unix(twoHourBlock.current.sunrise).format('LT') +  "</ul>")
-            $("#weather").append("<ul class='sunset'>" + "Sunset: " + moment.unix(twoHourBlock.current.sunset).format('LT') + "</ul>")
+            $("#weather").append("<li class='sunrise collection-item'>" + "Sunrise: " + moment.unix(twoHourBlock.current.sunrise).format('LT') + "</li>")
+            $("#weather").append("<li class='sunset collection-item'>" + "Sunset: " + moment.unix(twoHourBlock.current.sunset).format('LT') + "</i>")
 
             for (var i = 0; i < twoHourBlock.hourly.length; i++) {
 
 
-             
+
 
                 if (i % 2 !== 0 && i < 6) {
-                    console.log(twoHourBlock.hourly[i].temp.toFixed())
-                    console.log(twoHourBlock.hourly[i].humidity)
+                    // console.log(twoHourBlock.hourly[i].temp.toFixed())
+                    // console.log(twoHourBlock.hourly[i].humidity)
                     // console.log(timeConverter(weatherForecastObject.current.sunrise))
                     // console.log(timeConverter(weatherForecastObject.current.sunset))
 
-                    
-
-                    $("#weather").append("<h5>" +moment.unix(twoHourBlock.hourly[i].dt).format('LT')+ "</h5>"+"<h5 class='imgIcon'><img src='" + iconUrl + "'</h5>")
-                    $("#weather").append("Temp F: " + twoHourBlock.hourly[i].temp.toFixed())
-                    $("#weather").append("<ul class='temp'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</ul>")
-                    
-
-
+                    $("#weather").append("<li class='collection-item'><h5>" + moment.unix(twoHourBlock.hourly[i].dt).format('LT') + "</h5>" + "<h5 class='imgIcon collection-item'><img src='" + iconUrl + "'</h5></li>")
+                    $("#weather").append("<li class='collection-item'>"+"Temp F: " + twoHourBlock.hourly[i].temp.toFixed()+"</li>")
+                    $("#weather").append("<li class='humidity collection-item'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</li>")
                 }
             }
         })
-        
 }
 
 // FISHER-YATES SHUFFLE
 function fisherYatesShuffle(array) {
     var m = array.length, t, i;
-  
+
     // While there remain elements to shuffle…
     while (m) {
-  
-      // Pick a remaining element…
-      i = Math.floor(Math.random() * m--);
-  
-      // And swap it with the current element.
-      t = array[m];
-      array[m] = array[i];
-      array[i] = t;
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
     }
-  
+
     return array;
 }
