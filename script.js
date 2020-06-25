@@ -5,7 +5,6 @@
 // then display 6 hour forecast broken up into 3 displays
 // Display .sunrise, .sunset, .Temp, .Wind, .Description 
 
-
 // GLOBAL VARIABLE & OJBJECTS
 var hikingProjectAPIDataObject = {}
 var weatherForecastObject = {}
@@ -44,7 +43,7 @@ function queryHikingProjectDataAPI() {
         });
 }
 
-// GETS RANDOM TRAIL
+// GET RANDOM TRAIL FUNCTION
 function getRandomTrail() {
     var randomNum = ""
     randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
