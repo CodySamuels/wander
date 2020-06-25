@@ -1,7 +1,11 @@
    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-    #hikeMap {
-      height: 100%
+       #map {
+        height:300px;
+        width:300px;
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     /* Optional: Makes the sample page fill the window. */
