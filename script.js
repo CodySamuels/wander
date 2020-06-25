@@ -148,8 +148,6 @@ function sixHourForecast() {
     var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
     var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
 
-
-
     $.ajax({
         url: weatherQueryURL,
         method: "GET"
@@ -175,7 +173,7 @@ function sixHourForecast() {
 
                     
 
-                    $("#weather").append("<h5 class='imgIcon'><img src='" + iconUrl + "'>" +moment.unix(twoHourBlock.hourly[i].dt).format('LT')+ "</h5>")
+                    $("#weather").append("<h5>" +moment.unix(twoHourBlock.hourly[i].dt).format('LT')+ "</h5>"+"<h5 class='imgIcon'><img src='" + iconUrl + "'</h5>")
                     $("#weather").append("Temp F: " + twoHourBlock.hourly[i].temp.toFixed())
                     $("#weather").append("<ul class='temp'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</ul>")
                     
