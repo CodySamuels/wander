@@ -19,14 +19,14 @@ var userParameters = {
     minLength: ["&minLength=", ""],
     minStars: ["&minStars=", ""]
 };
+
 var map;
 var lat = ""
 var long = ""
 
-
-
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
+
     // VARIABLES SPECIFIC TO THE FUNCTION
     var hikingProjectAPIKey = "&key=200805406-750e5250addc429fbca823b830432e1f"
     var hikingQueryURL = "https://www.hikingproject.com/data/get-trails?" + userParameters.latitude[0] + userParameters.latitude[1] + userParameters.longitude[0] + userParameters.longitude[1] + userParameters.maxDistance[0] + userParameters.maxDistance[1] + userParameters.maxResults[0] + userParameters.maxResults[1] + userParameters.minLength[0] + userParameters[1] + userParameters.minStars[0] + userParameters.minStars[1] + hikingProjectAPIKey
@@ -57,8 +57,6 @@ function getRandomTrail() {
     sixHourForecast()
 
 }
-
-
 
 // GOOGLE MAPS FUNCTION
 function initMap() {
@@ -132,17 +130,15 @@ function populateRandomPage() {
     $("#hikeName").text(randomTrailObject.name)
     $("#difficulty").text("Difficulty: " + randomTrailObject.difficulty)
     $("#length").text("Length: " + randomTrailObject.length + " miles")
-    $("#elevationGain").text("Ascent: " + randomTrailObject.ascent + " feet.")
+    $("#elevationGain").text("Ascent: " + randomTrailObject.ascent + " feet")
     $("#hikeDescription").text(randomTrailObject.summary)
-    // FOR ADDING ANDREW'S WEATHER
-    // $("#weather").text(randomTrailObject.name)
-
-
 }
 
 // POPULATES THE LIST PAGE
 function populateListPage() {
     for (let i = 0; i < 10; i++) {
+
+        // fisherYatesShuffle(hikingProjectAPIDataObject.trails)
         newLink = $("<a>")
         newLink.attr("href", "userSelection.html")
         newLink.addClass("collection-item")
@@ -159,7 +155,7 @@ function populateListPage() {
     }
 }
 
-// POPULLATES SELECTION PAGE
+// POPULATES SELECTION PAGE
 function populateSelectionPage() {
 
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
@@ -180,7 +176,7 @@ function populateSelectionPage() {
     $("#hikeName").text(hikingProjectAPIDataObject.trails[99].name)
     $("#difficulty").text("Difficulty: " + hikingProjectAPIDataObject.trails[99].difficulty)
     $("#length").text("Length: " + hikingProjectAPIDataObject.trails[99].length + " miles")
-    $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet.")
+    $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet")
     $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
     // FOR ADDING ANDREW'S WEATHER
     //$("#weather").text(randomTrailObject.name)
