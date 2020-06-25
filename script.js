@@ -23,6 +23,8 @@ var map;
 var lat = ""
 var long = ""
 
+ 
+
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
     // VARIABLES SPECIFIC TO THE FUNCTION
@@ -51,7 +53,12 @@ function getRandomTrail() {
     randomTrailObject = hikingProjectAPIDataObject.trails[randomNum]
     lat = (randomTrailObject.latitude)
     long = (randomTrailObject.longitude)
+    console.log(hikingProjectAPIDataObject.trails[randomNum])
+    sixHourForecast()
+
 }
+
+
 
 // GOOGLE MAPS FUNCTION
 function initMap() {
@@ -104,44 +111,6 @@ function initMap() {
                     // }
 }
 
-//  FORECAST FUNCTION
-function sixHourForecast() {
-    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
-    var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
-
-   
-
-    $.ajax({
-        url: weatherQueryURL,
-        method: "GET"
-    })
-        
-        .then(function (twoHourBlock) {
-            weatherForecastObject = twoHourBlock
-            console.log(twoHourBlock)
-
-            
-    
-            for (var i = 0; i < twoHourBlock.hourly.length; i++) {
-
-                $("#weather").text("Temp F: "+ twoHourBlock.hourly[i].temp.toFixed())
-               
-
-                if (i % 2 !== 0 && i < 6) {
-                    console.log(twoHourBlock.hourly[i].temp)
-                    console.log(twoHourBlock.hourly[i].humidity)
-                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
-                    // console.log(timeConverter(weatherForecastObject.current.sunset))
-
-                   
-                  
-                  
-
-                }
-            } 
-        })  
-}
-
 // POPULATES THE RANDOM PAGE
 function populateRandomPage() {
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
@@ -166,6 +135,8 @@ function populateRandomPage() {
     $("#hikeDescription").text(randomTrailObject.summary)
     // FOR ADDING ANDREW'S WEATHER
     // $("#weather").text(randomTrailObject.name)
+
+
 }
 
 // POPULATES THE LIST PAGE
@@ -189,6 +160,7 @@ function populateListPage() {
 
 // POPULLATES SELECTION PAGE
 function populateSelectionPage() {
+
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
     if (hikingProjectAPIDataObject.trails[99].difficulty = "green") {
         hikingProjectAPIDataObject.trails[99].difficulty = "Very Easy"
@@ -210,7 +182,66 @@ function populateSelectionPage() {
     $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet.")
     $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
     // FOR ADDING ANDREW'S WEATHER
-    // $("#weather").text(randomTrailObject.name)
+    //$("#weather").text(randomTrailObject.name)
+
+}
+
+// //TIME CONVERTER FUNCTION
+// function timeConverter(UNIX_timestamp) {
+//     var a = new Date(UNIX_timestamp * 1000);
+//     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//     var year = a.getFullYear();
+//     var month = months[a.getMonth()];
+//     var date = a.getDate();
+//     var hour = a.getHours();
+//     var min = a.getMinutes();
+//     var time = hour + ':' + min;
+//     return time;
+// }
+//   console.log(timeConverter(weatherForecastObject.current.sunrise));
+
+
+
+//  FORECAST FUNCTION
+function sixHourForecast() {
+    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
+    var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
+
+    $.ajax({
+        url: weatherQueryURL,
+        method: "GET"
+    })
+
+        .then(function (twoHourBlock) {
+            weatherForecastObject = twoHourBlock
+            console.log(twoHourBlock)
+            var iconUrl = "http://openweathermap.org/img/w/" + twoHourBlock.current.weather[0].icon + ".png";
+            $("#weather").append("<ul class='sunrise'>" + "Sunrise: " + moment.unix(twoHourBlock.current.sunrise).format('LT') +  "</ul>")
+            $("#weather").append("<ul class='sunset'>" + "Sunset: " + moment.unix(twoHourBlock.current.sunset).format('LT') + "</ul>")
+
+            for (var i = 0; i < twoHourBlock.hourly.length; i++) {
+
+
+             
+
+                if (i % 2 !== 0 && i < 6) {
+                    console.log(twoHourBlock.hourly[i].temp.toFixed())
+                    console.log(twoHourBlock.hourly[i].humidity)
+                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
+                    // console.log(timeConverter(weatherForecastObject.current.sunset))
+
+                    
+
+                    $("#weather").append("<h5>" +moment.unix(twoHourBlock.hourly[i].dt).format('LT')+ "</h5>"+"<h5 class='imgIcon'><img src='" + iconUrl + "'</h5>")
+                    $("#weather").append("Temp F: " + twoHourBlock.hourly[i].temp.toFixed())
+                    $("#weather").append("<ul class='temp'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</ul>")
+                    
+
+
+                }
+            }
+        })
+        
 }
 
 // FISHER-YATES SHUFFLE
