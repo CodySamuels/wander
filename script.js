@@ -6,7 +6,7 @@
 // Display .sunrise, .sunset, .Temp, .Wind, .Description 
 
 // GLOBAL VARIABLE & OJBJECTS
-var hikingProjectAPIDataObject = {}
+var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
 var weatherForecastObject = {}
 var randomTrailObject = {}
 var userParameters = {
@@ -36,12 +36,13 @@ function queryHikingProjectDataAPI() {
     })
         .then(function (hikingAPIResponse) {
             hikingProjectAPIDataObject = hikingAPIResponse
+            localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
             getRandomTrail()
 
         });
 }
 
-// GET RANDOM TRAIL FUNCTION
+// SELECTS A RANDOM TRAIL
 function getRandomTrail() {
     var randomNum = ""
     randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
