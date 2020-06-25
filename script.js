@@ -161,10 +161,10 @@ function sixHourForecast() {
 
 
                 if (i % 2 !== 0 && i < 6) {
-                    console.log(twoHourBlock.hourly[i].temp)
+                    console.log(twoHourBlock.hourly[i].temp.toFixed())
                     console.log(twoHourBlock.hourly[i].humidity)
-                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
-                    // console.log(timeConverter(weatherForecastObject.current.sunset))
+                    console.log(timeConverter(weatherForecastObject.current.sunrise))
+                    console.log(timeConverter(weatherForecastObject.current.sunset))
 
 
 
