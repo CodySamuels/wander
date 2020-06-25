@@ -58,7 +58,7 @@ function getRandomTrail() {
 
 }
 
-// GOOGLE MAPS FUNCTION
+// GOOGLE MAPS FUNCTION FOR RANDOM PAGE
 function initMap() {
     lat = randomTrailObject.latitude
     lng = randomTrailObject.longitude
@@ -66,6 +66,58 @@ function initMap() {
     var sum = randomTrailObject.summary
     var con = randomTrailObject.conditionDetails
     var img = randomTrailObject.imgSqSmall
+    var myLatLng = { lat, lng };
+
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: lat, lng: lng },
+        zoom: 12
+    });
+    var contentString = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
+        '<div id="bodyContent">' +
+        '<h1>' + loc + '</h1>' +
+        '<h2>' + sum + '</h2>' +
+        '<h3>' + con + '</h3>' +
+        '</div>' +
+        '</div>';
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    })
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+    });
+    marker.addListener('click', function () {
+        infowindow.open(map, marker);
+    });
+
+    //       console.log(randomTrailObject); 
+
+    //       console.log(loc);
+    //       console.log(sum);
+    //       console.log(con);
+    //       console.log(response);
+    //       // $("#button").click(function () {
+    //       // })
+    //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
+    //       zoom: 12,
+    //       center: myLatLng
+    //     });
+
+    //  }); 
+    // }
+}
+
+// GOOGLE MAPS FUNCTION FOR USER SELECTION PAGE
+function initMapSelection() {
+    lat =  hikingProjectAPIDataObject.trails[99].latitude
+    lng =  hikingProjectAPIDataObject.trails[99].longitude
+    var loc =  hikingProjectAPIDataObject.trails[99].location
+    var sum =  hikingProjectAPIDataObject.trails[99].summary
+    var con =  hikingProjectAPIDataObject.trails[99].conditionDetails
+    var img =  hikingProjectAPIDataObject.trails[99].imgSqSmall
     var myLatLng = { lat, lng };
 
     map = new google.maps.Map(document.getElementById("map"), {
@@ -157,6 +209,8 @@ function populateListPage() {
 
 // POPULATES SELECTION PAGE
 function populateSelectionPage() {
+    lat = hikingProjectAPIDataObject.trails[99].latitude
+    long = hikingProjectAPIDataObject.trails[99].longitude
 
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
     if (hikingProjectAPIDataObject.trails[99].difficulty = "green") {
@@ -180,7 +234,7 @@ function populateSelectionPage() {
     $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
     // FOR ADDING ANDREW'S WEATHER
     //$("#weather").text(randomTrailObject.name)
-
+    sixHourForecast()
 }
 
 //  FORECAST FUNCTION
