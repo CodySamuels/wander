@@ -77,10 +77,12 @@ function initMap(queryURL) {
         console.log(sum);
         console.log(con);
         console.log(response);
-        $("#button").click(function () {
+        $(".welcomeButtons").click(function () {
 
 
         })
+
+       
 
 
 
