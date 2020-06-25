@@ -5,6 +5,7 @@
 // then display 6 hour forecast broken up into 3 displays
 // Display .sunrise, .sunset, .Temp, .Wind, .Description 
 // GLOBAL VARIABLE & OJBJECTS
+
 var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
 var weatherForecastObject = {}
 var randomTrailObject = {}
@@ -20,6 +21,8 @@ var userParameters = {
 
 var lat = ""
 var long = ""
+
+ 
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -46,6 +49,7 @@ function getRandomTrail() {
     lat = (randomTrailObject.latitude)
     long = (randomTrailObject.longitude)
     console.log(hikingProjectAPIDataObject.trails[randomNum])
+    sixHourForecast()
 
 }
 
@@ -76,6 +80,8 @@ function populateRandomPage() {
     $("#hikeDescription").text(randomTrailObject.summary)
     // FOR ADDING ANDREW'S WEATHER
     // $("#weather").text(randomTrailObject.name)
+
+
 }
 function populateListPage() {
     for (let i = 0; i < 10; i++) {
@@ -117,22 +123,22 @@ function populateSelectionPage() {
     $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet.")
     $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
     // FOR ADDING ANDREW'S WEATHER
-    // $("#weather").text(randomTrailObject.name)
+    //$("#weather").text(randomTrailObject.name)
+
 }
 
-//TIME CONVERTER FUNCTION
-function timeConverter(UNIX_timestamp) {
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = hour + ':' + min;
-    return time;
-}
+// //TIME CONVERTER FUNCTION
+// function timeConverter(UNIX_timestamp) {
+//     var a = new Date(UNIX_timestamp * 1000);
+//     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//     var year = a.getFullYear();
+//     var month = months[a.getMonth()];
+//     var date = a.getDate();
+//     var hour = a.getHours();
+//     var min = a.getMinutes();
+//     var time = hour + ':' + min;
+//     return time;
+// }
 //   console.log(timeConverter(weatherForecastObject.current.sunrise));
 
 
@@ -152,26 +158,32 @@ function sixHourForecast() {
         .then(function (twoHourBlock) {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
-
-
+            var iconUrl = "http://openweathermap.org/img/w/" + twoHourBlock.current.weather[0].icon + ".png";
+            $("#weather").append("<ul class='sunrise'>" + "Sunrise: " + moment.unix(twoHourBlock.current.sunrise).format('LT') +  "</ul>")
+            $("#weather").append("<ul class='sunset'>" + "Sunset: " + moment.unix(twoHourBlock.current.sunset).format('LT') + "</ul>")
 
             for (var i = 0; i < twoHourBlock.hourly.length; i++) {
 
-                $("#weather").text("Temp F: " + twoHourBlock.hourly[i].temp.toFixed())
 
+             
 
                 if (i % 2 !== 0 && i < 6) {
                     console.log(twoHourBlock.hourly[i].temp.toFixed())
                     console.log(twoHourBlock.hourly[i].humidity)
-                    console.log(timeConverter(weatherForecastObject.current.sunrise))
-                    console.log(timeConverter(weatherForecastObject.current.sunset))
+                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
+                    // console.log(timeConverter(weatherForecastObject.current.sunset))
 
+                    
 
-
+                    $("#weather").append("<h5 class='imgIcon'><img src='" + iconUrl + "'>" +moment.unix(twoHourBlock.hourly[i].dt).format('LT')+ "</h5>")
+                    $("#weather").append("Temp F: " + twoHourBlock.hourly[i].temp.toFixed())
+                    $("#weather").append("<ul class='temp'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</ul>")
+                    
 
 
                 }
             }
         })
+        
 }
 
