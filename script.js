@@ -53,58 +53,6 @@ function getRandomTrail() {
     long = (randomTrailObject.longitude)
 }
 
-
-// TIME CONVERTER
-function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
-  }
-
-
-//  FORECAST FUNCTION
-function sixHourForecast() {
-    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
-    var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
-
-   
-
-    $.ajax({
-        url: weatherQueryURL,
-        method: "GET"
-    })
-        
-        .then(function (twoHourBlock) {
-            weatherForecastObject = twoHourBlock
-            console.log(twoHourBlock)
-
-            
-    
-            for (var i = 0; i < twoHourBlock.hourly.length; i++) {
-
-                $("#weather").text("Temp F: "+ twoHourBlock.hourly[i].temp.toFixed())
-               
-
-                if (i % 2 !== 0 && i < 6) {
-                    console.log(twoHourBlock.hourly[i].temp)
-                    console.log(twoHourBlock.hourly[i].humidity)
-                    console.log(timeConverter(weatherForecastObject.current.sunrise))
-                    console.log(timeConverter(weatherForecastObject.current.sunset))
-
-                }
-            } 
-        })  
-}
-
-
-
 // POPULATES THE RANDOM PAGE
 function populateRandomPage() {
 
@@ -161,7 +109,7 @@ function populateListPage() {
 }
 
 function populateSelectionPage() {
-    
+
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
     if (hikingProjectAPIDataObject.trails[99].difficulty = "green") {
         hikingProjectAPIDataObject.trails[99].difficulty = "Very Easy"
@@ -191,4 +139,53 @@ function populateSelectionPage() {
 
     // FOR ADDING ANDREW'S WEATHER
     // $("#weather").text(randomTrailObject.name)
+}
+
+// TIME CONVERTER
+function timeConverter(UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+    return time;
+}
+
+
+//  FORECAST FUNCTION
+function sixHourForecast() {
+    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
+    var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
+
+
+
+    $.ajax({
+        url: weatherQueryURL,
+        method: "GET"
+    })
+
+        .then(function (twoHourBlock) {
+            weatherForecastObject = twoHourBlock
+            console.log(twoHourBlock)
+
+
+
+            for (var i = 0; i < twoHourBlock.hourly.length; i++) {
+
+                $("#weather").text("Temp F: " + twoHourBlock.hourly[i].temp.toFixed())
+
+
+                if (i % 2 !== 0 && i < 6) {
+                    console.log(twoHourBlock.hourly[i].temp)
+                    console.log(twoHourBlock.hourly[i].humidity)
+                    console.log(timeConverter(weatherForecastObject.current.sunrise))
+                    console.log(timeConverter(weatherForecastObject.current.sunset))
+
+                }
+            }
+        })
 }
