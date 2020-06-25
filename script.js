@@ -7,6 +7,7 @@
 // GLOBAL VARIABLE & OJBJECTS
 
 var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
+var randomTrailObject = JSON.parse(localStorage.getItem("randomHikeData")) || {};
 var weatherForecastObject = {}
 var randomTrailObject = {}
 var userParameters = {
@@ -18,7 +19,7 @@ var userParameters = {
     minLength: ["&minLength=", ""],
     minStars: ["&minStars=", ""]
 };
-
+var map;
 var lat = ""
 var long = ""
 
@@ -29,6 +30,7 @@ function queryHikingProjectDataAPI() {
     // VARIABLES SPECIFIC TO THE FUNCTION
     var hikingProjectAPIKey = "&key=200805406-750e5250addc429fbca823b830432e1f"
     var hikingQueryURL = "https://www.hikingproject.com/data/get-trails?" + userParameters.latitude[0] + userParameters.latitude[1] + userParameters.longitude[0] + userParameters.longitude[1] + userParameters.maxDistance[0] + userParameters.maxDistance[1] + userParameters.maxResults[0] + userParameters.maxResults[1] + userParameters.minLength[0] + userParameters[1] + userParameters.minStars[0] + userParameters.minStars[1] + hikingProjectAPIKey
+
     // AJAX FUNCTION
     $.ajax({
         url: hikingQueryURL,
@@ -36,11 +38,14 @@ function queryHikingProjectDataAPI() {
     })
         .then(function (hikingAPIResponse) {
             hikingProjectAPIDataObject = hikingAPIResponse
+            // getRandomTrail()
+            // initMap(queryURL)
+            fisherYatesShuffle(hikingProjectAPIDataObject.trails)
             localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
-            getRandomTrail()
-
+            console.log(hikingProjectAPIDataObject)
         });
 }
+
 // SELECTS A RANDOM TRAIL
 function getRandomTrail() {
     var randomNum = ""
@@ -55,6 +60,56 @@ function getRandomTrail() {
 
 
 
+// GOOGLE MAPS FUNCTION
+function initMap() {
+    lat = randomTrailObject.latitude
+    lng = randomTrailObject.longitude
+    var loc = randomTrailObject.location
+    var sum = randomTrailObject.summary 
+    var con = randomTrailObject.conditionDetails
+    var img = randomTrailObject.imgSqSmall
+    var myLatLng = { lat, lng };
+
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: lat, lng: lng },
+        zoom: 12
+      });
+      var contentString = '<div id="content">' +
+      '<div id="siteNotice">' +
+      '</div>' +
+      '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
+      '<div id="bodyContent">' +
+      '<h1>'+loc+'</h1>' +
+      '<h2>'+sum+'</h2>'+
+      '<h3>'+ con + '</h3>' +  
+      '</div>' +
+      '</div>';
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString})
+          var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+            
+            //       console.log(randomTrailObject); 
+            
+            //       console.log(loc);
+            //       console.log(sum);
+            //       console.log(con);
+            //       console.log(response);
+            //       // $("#button").click(function () {
+                //       // })
+                //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
+                    //       zoom: 12,
+                    //       center: myLatLng
+                    //     });
+                    
+                    //  }); 
+                    // }
+}
 
 // POPULATES THE RANDOM PAGE
 function populateRandomPage() {
@@ -83,6 +138,8 @@ function populateRandomPage() {
 
 
 }
+
+// POPULATES THE LIST PAGE
 function populateListPage() {
     for (let i = 0; i < 10; i++) {
         newLink = $("<a>")
@@ -100,6 +157,8 @@ function populateListPage() {
         })
     }
 }
+
+// POPULLATES SELECTION PAGE
 function populateSelectionPage() {
 
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
@@ -185,3 +244,21 @@ function sixHourForecast() {
         
 }
 
+// FISHER-YATES SHUFFLE
+function fisherYatesShuffle(array) {
+    var m = array.length, t, i;
+  
+    // While there remain elements to shuffle…
+    while (m) {
+  
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+  
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+  
+    return array;
+}
