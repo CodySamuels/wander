@@ -6,7 +6,7 @@
 // Display .sunrise, .sunset, .Temp, .Wind, .Description 
 
 // GLOBAL VARIABLE & OJBJECTS
-var hikingProjectAPIDataObject = {}
+var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
 var weatherForecastObject = {}
 var randomTrailObject = {}
 
@@ -37,18 +37,18 @@ function queryHikingProjectDataAPI() {
     })
         .then(function (hikingAPIResponse) {
             hikingProjectAPIDataObject = hikingAPIResponse
+            localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
             getRandomTrail()
         });
 }
 
-// GET RANDOM TRAIL FUNCTION
+// SELECTS A RANDOM TRAIL
 function getRandomTrail() {
     var randomNum = ""
     randomNum = Math.floor(Math.random() * userParameters.maxResults[1] + 1)
     randomTrailObject = hikingProjectAPIDataObject.trails[randomNum]
     lat = (randomTrailObject.latitude)
     long = (randomTrailObject.longitude)
-    console.log(hikingProjectAPIDataObject.trails[randomNum])
 }
 
 // FORECAST FUNCTION
@@ -74,3 +74,91 @@ function sixHourForecast() {
             // }
         });
 };
+
+// POPULATES THE RANDOM PAGE
+function populateRandomPage() {
+
+    // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
+    if (randomTrailObject.difficulty = "green") {
+        randomTrailObject.difficulty = "Very Easy"
+
+    } else if (randomTrailObject.difficulty = "greenBlue") {
+        randomTrailObject.difficulty = "Easy"
+
+    } else if (randomTrailObject.difficulty = "blue") {
+        randomTrailObject.difficulty = "Intermediate"
+
+    } else if (randomTrailObject.difficulty = "blueBlack") {
+        randomTrailObject.difficulty = "Difficult"
+
+    } else if (randomTrailObject.difficulty = "black") {
+        randomTrailObject.difficulty = "Very Difficult"
+
+    } else if (randomTrailObject.difficulty = "dblack") {
+        randomTrailObject.difficulty = "Extreme"
+    }
+
+    // APPENDS TO PAGE
+    $("#hikeName").text(randomTrailObject.name)
+    $("#difficulty").text("Difficulty: " + randomTrailObject.difficulty)
+    $("#length").text("Length: " + randomTrailObject.length + " miles")
+    $("#elevationGain").text("Ascent: " + randomTrailObject.ascent + " feet.")
+    $("#hikeDescription").text(randomTrailObject.summary)
+
+    // FOR ADDING ANDREW'S WEATHER
+    // $("#weather").text(randomTrailObject.name)
+}
+
+function populateListPage() {
+
+    for (let i = 0; i < 10; i++) {
+        newLink = $("<a>")
+        newLink.attr("href", "userSelection.html")
+        newLink.addClass("collection-item")
+        newLink.attr("id", `link+${i}`)
+        newLink.text(hikingProjectAPIDataObject.trails[i].name)
+        $(".collection").append(newLink)
+
+        $(newLink).on("click", function (event) {
+            event.preventDefault();
+            console.log(hikingProjectAPIDataObject.trails[i])
+            var trailToLoad = hikingProjectAPIDataObject.trails[i]
+            hikingProjectAPIDataObject.trails.splice(-1, 1, trailToLoad)
+            localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
+            window.location.href = './userSelection.html';
+        })
+    }
+}
+
+function populateSelectionPage() {
+    
+    // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
+    if (hikingProjectAPIDataObject.trails[99].difficulty = "green") {
+        hikingProjectAPIDataObject.trails[99].difficulty = "Very Easy"
+
+    } else if (hikingProjectAPIDataObject.trails[99].difficulty = "greenBlue") {
+        hikingProjectAPIDataObject.trails[99].difficulty = "Easy"
+
+    } else if (hikingProjectAPIDataObject.trails[99].difficulty = "blue") {
+        hikingProjectAPIDataObject.trails[99].difficulty = "Intermediate"
+
+    } else if (hikingProjectAPIDataObject.trails[99].difficulty = "blueBlack") {
+        hikingProjectAPIDataObject.trails[99].difficulty = "Difficult"
+
+    } else if (hikingProjectAPIDataObject.trails[99].difficulty = "black") {
+        hikingProjectAPIDataObject.trails[99].difficulty = "Very Difficult"
+
+    } else if (hikingProjectAPIDataObject.trails[99].difficulty = "dblack") {
+        hikingProjectAPIDataObject.trails[99].difficulty = "Extreme"
+    }
+
+    // APPENDS TO PAGE
+    $("#hikeName").text(hikingProjectAPIDataObject.trails[99].name)
+    $("#difficulty").text("Difficulty: " + hikingProjectAPIDataObject.trails[99].difficulty)
+    $("#length").text("Length: " + hikingProjectAPIDataObject.trails[99].length + " miles")
+    $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet.")
+    $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
+
+    // FOR ADDING ANDREW'S WEATHER
+    // $("#weather").text(randomTrailObject.name)
+}
