@@ -17,8 +17,10 @@ var userParameters = {
     minLength: ["&minLength=", ""],
     minStars: ["&minStars=", ""]
 };
+
 var lat = ""
 var long = ""
+
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
     // VARIABLES SPECIFIC TO THE FUNCTION
@@ -33,6 +35,7 @@ function queryHikingProjectDataAPI() {
             hikingProjectAPIDataObject = hikingAPIResponse
             localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
             getRandomTrail()
+
         });
 }
 // SELECTS A RANDOM TRAIL
@@ -42,26 +45,66 @@ function getRandomTrail() {
     randomTrailObject = hikingProjectAPIDataObject.trails[randomNum]
     lat = (randomTrailObject.latitude)
     long = (randomTrailObject.longitude)
+    console.log(hikingProjectAPIDataObject.trails[randomNum])
+
 }
-// FORECAST FUNCTION
+
+//TIME CONVERTER FUNCTION
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+  }
+//   console.log(timeConverter(weatherForecastObject.current.sunrise));
+
+
+
+//  FORECAST FUNCTION
 function sixHourForecast() {
-    var weatherAPIkey = "20139dab005aa19921ee9f2798f4a2e7";
-    var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=${weatherAPIkey}`;
+    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
+    var weatherQueryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
+
+   
+
     $.ajax({
         url: weatherQueryURL,
         method: "GET"
     })
-        // TWO HOUR TIME BLOCKS WILL BE LOOKED AT OVER A 6 HOUR TIME PERIOD
+        
         .then(function (twoHourBlock) {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
-            // for (var i = 0; i < twoHourBlock.list.length; i++) {
-            //     if (twoHourBlock.list[i].dt_txt.indexOf("12:00:00") !== -1) {
-            //         console.log(twoHourBlock.list[i])
-            //     }
-            // }
-        });
-};
+
+            
+    
+            for (var i = 0; i < twoHourBlock.hourly.length; i++) {
+
+                $("#weather").text("Temp F: "+ twoHourBlock.hourly[i].temp.toFixed())
+               
+
+                if (i % 2 !== 0 && i < 6) {
+                    console.log(twoHourBlock.hourly[i].temp)
+                    console.log(twoHourBlock.hourly[i].humidity)
+                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
+                    // console.log(timeConverter(weatherForecastObject.current.sunset))
+
+                   
+                  
+                  
+
+                }
+            } 
+        })  
+}
+
+
 // POPULATES THE RANDOM PAGE
 function populateRandomPage() {
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
@@ -97,7 +140,6 @@ function populateListPage() {
         $(".collection").append(newLink)
         $(newLink).on("click", function (event) {
             event.preventDefault();
-            console.log(hikingProjectAPIDataObject.trails[i])
             var trailToLoad = hikingProjectAPIDataObject.trails[i]
             hikingProjectAPIDataObject.trails.splice(-1, 1, trailToLoad)
             localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
