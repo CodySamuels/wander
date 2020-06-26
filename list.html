@@ -33,8 +33,7 @@
     <!--needs padding, will be the map with pins-->
     <div class="animate__animated animate__fadeIn row center-align listImage">
       <div class="col s12">
-        <img src="http://placekitten.com/500/500" id="hikeMap" class="responsive-img circle">
-        <!--materialboxed class for zoomable???-->
+      <div id = "map" class="responsive-img"></div>
       </div>
     </div>
 
@@ -70,6 +69,9 @@
 
     <!-- OUR JS -->
     <script src="script.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9k83loTwkEX28Ez2CA0pijP3HXyttslo&callback=initMap">
+      </script>
     <script language="javascript">
       populateListPage();
     </script>
