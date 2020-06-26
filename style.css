@@ -7,7 +7,22 @@
     margin-left: auto;
     margin-right: auto;
 }
+h1 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: 1.8rem 0 1.68rem 0;
+}
 
+h2 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: -0.626667rem 0 1.424rem 0;
+}
+h3 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: -0.053333rem 0 1.168rem 0;
+}
 body {
     display:flex;
     min-height:100vh;
