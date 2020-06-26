@@ -23,6 +23,9 @@ h3 {
     line-height: 110%;
     margin: -0.053333rem 0 1.168rem 0;
 }
+.hikeName1{
+  font-size: 3.0rem;
+}
 body {
     display:flex;
     min-height:100vh;
