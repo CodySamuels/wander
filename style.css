@@ -1,8 +1,8 @@
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map {
-    height:500px;
-    width:500px;
+    height:300px;
+    width:300px;
     display:block;
     margin-left: auto;
     margin-right: auto;
@@ -47,6 +47,7 @@ main {
     border-radius:1.25rem;
     padding:2rem;
     opacity: 80%;
+    margin-top:3rem;
 }
 
 #hikeDescription{
@@ -161,7 +162,6 @@ i {
 .btn {
     border:2px white;
 }
-<<<<<<< HEAD
 #map {
     height:300px;
     width:300px;
@@ -169,11 +169,6 @@ i {
     margin-left: auto;
     margin-right: auto;
 }
-
-#hikeInfo {
-    border-radius:1.25rem;
-}
-=======
 
 #hikeInfo, .card, #weather, .collection, .btn{ 
     opacity: 80%;
@@ -191,4 +186,3 @@ i {
 .temp, .humidity{
     padding: 1rem;
 }
->>>>>>> dev

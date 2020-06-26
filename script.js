@@ -359,7 +359,6 @@ function fisherYatesShuffle(array) {
     return array;
 }
 
-<<<<<<< HEAD
 //HOME PAGE SLIDESHOW
 var images=new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-5532A3D8B36F.JPG", "./assets/IMG_5925.jpg", "./assets/IMG-2722.jpg", "./assets/mistyforest.jpg", "./assets/IMG-9687.jpg", "./assets/IMG-9365.jpg");
             var nextimage=0;
@@ -374,14 +373,3 @@ var images=new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-
               });
           }
 
-=======
-// SLIDE SHOW FUNCTION
-function doSlideshow() {
-    if (nextimage >= images.length) { nextimage = 0; }
-    $('.slideshow-container')
-        .css('background-image', 'url("' + images[nextimage++] + '")')
-        .fadeIn(500, function () {
-            setTimeout(doSlideshow, 3000);
-        });
-}
->>>>>>> dev
