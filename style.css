@@ -6,6 +6,7 @@
     display:block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 1.25rem;
 }
 h1 {
     font-size: 1.0rem;
@@ -38,6 +39,7 @@ main {
     justify-content:center;
     align-items:center;
     flex-direction:row;
+   
 }
 
 .slideshow-container {
@@ -77,6 +79,7 @@ main {
 }
 
 .welcomeContainer {
+    flex-wrap: wrap;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -142,10 +145,20 @@ i {
 .btn {
     border:2px white;
 }
-#map {
-    height:300px;
-    width:300px;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
+
+#hikeInfo, .card, #weather, .collection, .btn{ 
+    opacity: 80%;
+    border-radius: 1.25rem;
+}
+.card{
+ display: flex;
+    margin: 1rem;
+}
+
+.card-title{
+    padding-left: 1rem;
+}
+
+.temp, .humidity{
+    padding: 1rem;
 }
