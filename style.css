@@ -6,8 +6,27 @@
     display:block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 1.25rem;
+}
+h1 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: 1.8rem 0 1.68rem 0;
 }
 
+h2 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: -0.626667rem 0 1.424rem 0;
+}
+h3 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: -0.053333rem 0 1.168rem 0;
+}
+.hikeName1{
+  font-size: 3.0rem;
+}
 body {
     display:flex;
     min-height:100vh;
@@ -20,6 +39,7 @@ main {
     justify-content:center;
     align-items:center;
     flex-direction:row;
+   
 }
 
 #hikeName {
@@ -75,6 +95,7 @@ main {
 }
 
 .welcomeContainer {
+    flex-wrap: wrap;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -140,6 +161,7 @@ i {
 .btn {
     border:2px white;
 }
+<<<<<<< HEAD
 #map {
     height:300px;
     width:300px;
@@ -151,3 +173,22 @@ i {
 #hikeInfo {
     border-radius:1.25rem;
 }
+=======
+
+#hikeInfo, .card, #weather, .collection, .btn{ 
+    opacity: 80%;
+    border-radius: 1.25rem;
+}
+.card{
+ display: flex;
+    margin: 1rem;
+}
+
+.card-title{
+    padding-left: 1rem;
+}
+
+.temp, .humidity{
+    padding: 1rem;
+}
+>>>>>>> dev
