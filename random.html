@@ -22,16 +22,24 @@
                     class="small material-icons">home</i>Keep WANDERing</a>
         </div>
     </nav>
+
     <div class="animate__animated animate__fadeIn row">
         <div class="col s12">
             <h1 class="center-align" id="hikeName">Placeholder</h1>
         </div>
     </div>
+
+    <div class="valign-wrapper col s6">
+        <!--specific hike map (materialboxed class to make zoomable image-->
+        <div id="map" class="responsive-img"></div>
+    </div>
+
     <div class="animate__animated animate_fadeIn random row">
         <div class="valign-wrapper col s12">
             <h5 id="hikeDescription">Placeholder</h5>
         </div>
     </div>
+
     <main class="welcomeContainer container">
         <!--make this into it's own container with flex display for spacing-->
         <div class="animate__animated animate__fadeIn random row">
@@ -41,19 +49,16 @@
                     <li id="difficulty" class="collection-item">difficulty placeholder</li>
                     <li id="length" class="collection-item">length placeholder</li>
                     <li id="elevationGain" class="collection-item">elevation gain placeholder</li>
-                    <li id="weather" class="collection-item">weather placeholder<br>
-                        <ul id="weatherInfo">
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <div class="valign-wrapper col s6">
-                <!--specific hike map (materialboxed class to make zoomable image-->
-                <img src="http://placekitten.com/300/300" id="randomHikeMap" class="responsive-img circle">
+                <ul id="weather" class="collection">
+                    <!--check for table consistency when ul is dynamically created-->
+                </ul>
             </div>
         </div>
-        </div>
     </main>
+
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
     <footer class="page-footer transparent">
         <div class="container footerSpacing">
@@ -62,6 +67,7 @@
             <a class="grey-text text-lighten-3 right" href="https://www.noaa.gov/weather">NOAA</a>
         </div>
     </footer>
+
     <!-- JAVASCRIPT -->
     <div>
         <!-- MATERIALIZE JS -->
@@ -71,7 +77,12 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <!-- OUR JS -->
         <script src="script.js"></script>
-        <script language="javascript">
+        <!--GOOGLEMAPS-->
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9k83loTwkEX28Ez2CA0pijP3HXyttslo&callback=initMap">
+        </script>
+
+<script language="javascript">
             getRandomTrail();
             populateRandomPage();
         </script>

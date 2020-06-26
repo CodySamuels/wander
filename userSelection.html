@@ -22,16 +22,19 @@
                     class="small material-icons">home</i>Keep WANDERing</a>
         </div>
     </nav>
+
     <div class="animate__animated animate__fadeIn row">
         <div class="col s12">
             <h1 class="center-align" id="hikeName">Placeholder</h1>
         </div>
     </div>
+
     <div class="animate__animated animate_fadeIn random row">
         <div class="valign-wrapper col s12">
             <h5 id="hikeDescription">Placeholder</h5>
         </div>
     </div>
+
     <main class="welcomeContainer container">
         <!--make this into it's own container with flex display for spacing-->
         <div class="animate__animated animate__fadeIn random row">
@@ -51,6 +54,7 @@
         </div>
         </div>
     </main>
+
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
     <footer class="page-footer transparent">
         <div class="container footerSpacing">
@@ -59,6 +63,7 @@
             <a class="grey-text text-lighten-3 right" href="https://www.noaa.gov/weather">NOAA</a>
         </div>
     </footer>
+    
     <!-- JAVASCRIPT -->
     <div>
         <!-- MATERIALIZE JS -->
@@ -68,6 +73,8 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <!-- OUR JS -->
         <script src="script.js"></script>
+        <!--GOOGLEMAPS-->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9k83loTwkEX28Ez2CA0pijP3HXyttslo&callback=queryHikingProjectDataAPI"></script>
         <script language="javascript">
             populateSelectionPage();
         </script>

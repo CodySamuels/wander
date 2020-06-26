@@ -46,6 +46,7 @@ function queryHikingProjectDataAPI() {
             HikingProjectAPIDataObject = response
             getRandomTrail()
             initMap(queryURL);
+           
         });
 }
 // FUNCTIONS
@@ -56,66 +57,144 @@ function getRandomTrail() {
     // return (HikingProjectAPIDataObject.trails[randomNum]);
 };
 
-function initMap(queryURL) {
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        var trailsAR = response.trails
-        var randomTrail = trailsAR[getRandomTrail()];
-        console.log(randomTrail);
+// GOOGLE MAPS FUNCTION
+function initMap() {
+    lat = randomTrailObject.latitude
+    lng = randomTrailObject.longitude
+    var loc = randomTrailObject.location
+    var sum = randomTrailObject.summary 
+    var con = randomTrailObject.conditionDetails
+    var img = randomTrailObject.imgSqSmall
+    var myLatLng = { lat, lng };
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: lat, lng: lng },
+        zoom: 12
+      });
+      var contentString = '<div id="content">' +
+      '<div id="siteNotice">' +
+      '</div>' +
+      '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
+      '<div id="bodyContent">' +
+      '<h1>'+loc+'</h1>' +
+      '<h2>'+sum+'</h2>'+
+      '<h3>'+ con + '</h3>' +  
+      '</div>' +
+      '</div>';
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString})
+          var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
 
-        var lat = randomTrail.latitude
-        var lng = randomTrail.longitude
-        var loc = randomTrail.location
-        var sum = randomTrail.summary
-        var con = randomTrail.conditionDetails
-        var img = randomTrail.imgSqSmall
-        console.log(loc);
-        console.log(sum);
-        console.log(con);
-        console.log(response);
-        $(".welcomeButtons").click(function () {
+
+        function multiplepins(){
+            console.log(hikingProjectAPIDataObject);
+            
+            var locations=[]
+            // var locations = [
+            //     ['Bondi Beach', -33.890542, 151.274856, 4],
+            //     ['Coogee Beach', -33.923036, 151.259052, 5],
+            //     ['Cronulla Beach', -34.028249, 151.157507, 3],
+            //     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+            //     ['Maroubra Beach', -33.950198, 151.259302, 1]
+            //   ];
+              for(var i=0; i<10; i++){
+                var newArr=[hikingProjectAPIDataObject.trails[i].name,hikingProjectAPIDataObject.trails[i].latitude,hikingProjectAPIDataObject.trails[i].longitude,i]
+                locations.push(newArr)
+              }
+              console.log(locations);
+              
+          
+              var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: new google.maps.LatLng(47.6062, 122.3321),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              });
+          
+              var infowindow = new google.maps.InfoWindow();
+          
+              var marker, i;
+          
+              for (i = 0; i < locations.length; i++) {  
+                marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                  map: map
+                });
+          
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                  return function() {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                  }
+                })(marker, i));
+              }
+        }
+
+// function initMap(queryURL) {
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//     }).then(function (response) {
+//         var trailsAR = response.trails
+//         var randomTrail = trailsAR[getRandomTrail()];
+//         console.log(randomTrail);
+
+//         var lat = randomTrail.latitude
+//         var lng = randomTrail.longitude
+//         var loc = randomTrail.location
+//         var sum = randomTrail.summary
+//         var con = randomTrail.conditionDetails
+//         var img = randomTrail.imgSqSmall
+//         console.log(loc);
+//         console.log(sum);
+//         console.log(con);
+//         console.log(response);
+//         $(".welcomeButtons").click(function () {
 
 
-        })
+//         })
 
        
 
 
 
 
-        var myLatLng = { lat, lng };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: myLatLng
-        });
-        var contentString = '<div id="content">' +
-            '<div id="siteNotice">' +
-            '</div>' +
-            '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
-            '<div id="bodyContent">' +
-            '<h1>' + loc + '</h1>' +
-            '<h2>' + sum + '</h2>' +
-            '<h3>' + con + '</h3>' +
-            '</div>' +
-            '</div>';
+//         var myLatLng = { lat, lng };
+//         var map = new google.maps.Map(document.getElementById('map'), {
+//             zoom: 12,
+//             center: myLatLng
+//         });
+//         var contentString = '<div id="content">' +
+//             '<div id="siteNotice">' +
+//             '</div>' +
+//             '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
+//             '<div id="bodyContent">' +
+//             '<h1>' + loc + '</h1>' +
+//             '<h2>' + sum + '</h2>' +
+//             '<h3>' + con + '</h3>' +
+//             '</div>' +
+//             '</div>';
 
 
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        })
+//         var infowindow = new google.maps.InfoWindow({
+//             content: contentString
+//         })
 
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Uluru (Ayers Rock)'
-        });
-        marker.addListener('click', function () {
-            infowindow.open(map, marker);
-        });
-    });
-}
+//         var marker = new google.maps.Marker({
+//             position: myLatLng,
+//             map: map,
+//             title: 'Uluru (Ayers Rock)'
+//         });
+//         marker.addListener('click', function () {
+//             infowindow.open(map, marker);
+//         });
+//     });
+// }
 
 queryHikingProjectDataAPI()
 var lat = ""
@@ -231,6 +310,8 @@ function populateRandomPage() {
     // $("#weather").text(randomTrailObject.name)
 }
 function populateListPage() {
+    console.log(hikingProjectAPIDataObject);
+    
     for (let i = 0; i < 10; i++) {
         newLink = $("<a>")
         newLink.attr("href", "userSelection.html")
@@ -246,6 +327,7 @@ function populateListPage() {
             window.location.href = './userSelection.html';
         })
     }
+    multiplepins()
 }
 function populateSelectionPage() {
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
