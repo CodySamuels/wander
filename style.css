@@ -1,21 +1,19 @@
-   /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-    #hikeMap {
-      height: 100%
-    }
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+    height:300px;
+    width:300px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    /* Optional: Makes the sample page fill the window. */
-    html,
-    /* body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    } */
 body {
     display:flex;
     min-height:100vh;
     flex-direction:column;
 }
+
 main {
     flex:1 0 auto;
     display:flex;
@@ -23,28 +21,33 @@ main {
     align-items:center;
     flex-direction:row;
 }
+
 .welcomeBody {
     background-image:url(https://i.imgur.com/tsHk4m4.jpg);
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
 }
+
 .welcome {
     display:flex;
     align-content:center;
 }
+
 .footer {
     display:flex;
     flex-shrink:0;
     justify-content:space-around;
     align-items:flex-end;
 }
+
 .welcomeContainer {
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:row;
 }
+
 .welcomeButtons {
     display:flex;
     align-content:center;
@@ -52,21 +55,25 @@ main {
     justify-content:space-around;
     flex-wrap:wrap;
 }
+
 .random {
     display:flex;
     justify-content:center;
     align-content:center;
     flex-flow:row wrap;
 }
+
 nav {
     background-color:"#608000"
 }
+
 .pageBody {
     background-image:url(https://image.freepik.com/free-photo/natural-green-blurred-bokeh-with-green-leaf-abstract-background_35652-99.jpg);
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
 }
+
 .footerSpacing {
     display:flex;
     align-items:right;
@@ -74,25 +81,32 @@ nav {
     padding-top: auto 0;
     padding-bottom: auto 0;
 }
+
 .listImage{
     padding-top: 7%;
 }
+
 .footerLinks {
     color:black;
 }
+
 #welcomeBanner {
     font-size:4rem;
     padding-top:2%;
     font-family:'Krona One', sans-serif;
 }
+
 i {
     font-size:60px;
 }
+
 #topNav{
     font-size:12pt;
 }
+
 .btn {
     border:2px white;
+<<<<<<< HEAD
 }
 #map {
     height:300px;
@@ -100,4 +114,6 @@ i {
     display:block;
     margin-left: auto;
     margin-right: auto;
+=======
+>>>>>>> dev
 }
