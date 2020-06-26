@@ -1,6 +1,6 @@
 # Wander
 
-![Deployed Application Screenshot](./assets/screenshotSplash.png)
+![Deployed Application Screenshot](./screenshots/screenshotSplash.png)
 
 Wander is an application that makes choosing a hike easy. We take all the hard work out of choosing a hike
 
