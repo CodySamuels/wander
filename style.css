@@ -1,8 +1,8 @@
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map {
-    height:300px;
-    width:300px;
+    height:500px;
+    width:500px;
     display:block;
     margin-left: auto;
     margin-right: auto;
@@ -20,6 +20,22 @@ main {
     justify-content:center;
     align-items:center;
     flex-direction:row;
+}
+
+#hikeName {
+    background-color:whitesmoke;
+    border-radius:1.25rem;
+    padding:2rem;
+    opacity: 80%;
+}
+
+#hikeDescription{
+    background-color:whitesmoke;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    opacity: 80%;
+    margin:2rem;
+    margin-top:3rem;
 }
 
 .slideshow-container {
@@ -130,4 +146,8 @@ i {
     display:block;
     margin-left: auto;
     margin-right: auto;
+}
+
+#hikeInfo {
+    border-radius:1.25rem;
 }
