@@ -96,13 +96,7 @@ function initMap() {
             console.log(hikingProjectAPIDataObject);
             
             var locations=[]
-            // var locations = [
-            //     ['Bondi Beach', -33.890542, 151.274856, 4],
-            //     ['Coogee Beach', -33.923036, 151.259052, 5],
-            //     ['Cronulla Beach', -34.028249, 151.157507, 3],
-            //     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-            //     ['Maroubra Beach', -33.950198, 151.259302, 1]
-            //   ];
+           
               for(var i=0; i<10; i++){
                 var newArr=[hikingProjectAPIDataObject.trails[i].name,hikingProjectAPIDataObject.trails[i].latitude,hikingProjectAPIDataObject.trails[i].longitude,i]
                 locations.push(newArr)
@@ -472,3 +466,17 @@ function fisherYatesShuffle(array) {
 
     return array;
 }
+
+//HOME PAGE SLIDESHOW
+var images=new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-5532A3D8B36F.JPG", "./assets/IMG_5925.jpg", "./assets/IMG-2722.jpg", "./assets/mistyforest.jpg", "./assets/IMG-9687.jpg", "./assets/IMG-9365.jpg");
+            var nextimage=0;
+            doSlideshow();
+
+            function doSlideshow(){
+              if(nextimage>=images.length){nextimage=0;}
+              $('.slideshow-container')
+              .css('background-image','url("'+images[nextimage++]+'")')
+              .fadeIn(500,function(){
+                  setTimeout(doSlideshow,3000);
+              });
+          }
