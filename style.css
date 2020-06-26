@@ -6,6 +6,7 @@
     display:block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 1.25rem;
 }
 h1 {
     font-size: 1.0rem;
@@ -145,7 +146,8 @@ i {
     border:2px white;
 }
 
-#hikeInfo, .card, #weather{
+#hikeInfo, .card, #weather, .collection, .btn{ 
+    opacity: 80%;
     border-radius: 1.25rem;
 }
 .card{

@@ -461,10 +461,7 @@ function currentConditions() {
     })
         .then(function (trailWeather) {
 
-            currentWeatherObject = trailWeather
-
-            $("#weather").append("<li class='collection-item'>" + "Temp F: " + trailWeather.current.hourly.temp.toFixed() + "</li>")
-
+            
         })
 }
 
