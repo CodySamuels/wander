@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -12,6 +13,7 @@
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="pageBody">
     <!--Top nav bar-->
     <nav>
@@ -37,7 +39,7 @@
     <main class="welcomeContainer container">
         <!--make this into it's own container with flex display for spacing-->
         <div class="animate__animated animate__fadeIn random row">
-            <div class="valign-wrapper col s6">
+            <div class="valign-wrapper col s6" id="hikeListCorners">
                 <!--specific hike info-->
                 <ul id="hikeInfo" class="collection">
                     <li id="difficulty" class="collection-item">difficulty placeholder</li>
@@ -45,13 +47,20 @@
                     <li id="elevationGain" class="collection-item">elevation gain placeholder</li>
                 </ul>
             </div>
-            <div class="valign-wrapper col s6">
+            <div class="valign-wrapper col s6" id="sunriseListCorners">
                 <ul id="weather" class="collection">
                     <!--check for table consistency when ul is dynamically created-->
                 </ul>
             </div>
         </div>
+
+        <div class="row" id="weatherCards">
+
+
+        </div>
     </main>
+
+
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
     <footer class="page-footer transparent">
         <div class="container footerSpacing">
@@ -63,7 +72,7 @@
     <!-- JAVASCRIPT -->
     <div>
 
-       <!-- MOMENT CDN -->
+        <!-- MOMENT CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <!-- MATERIALIZE JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -74,12 +83,13 @@
         <script src="script.js"></script>
         <!--GOOGLEMAPS-->
         <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9k83loTwkEX28Ez2CA0pijP3HXyttslo&callback=initMap">
-        </script>
-<script language="javascript">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9k83loTwkEX28Ez2CA0pijP3HXyttslo&callback=initMap">
+            </script>
+        <script language="javascript">
             getRandomTrail();
             populateRandomPage();
         </script>
     </div>
 </body>
+
 </html>

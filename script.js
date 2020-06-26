@@ -8,6 +8,7 @@
 
 var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
 var randomTrailObject = JSON.parse(localStorage.getItem("randomHikeData")) || {};
+var currentWeatherObject = {}
 var weatherForecastObject = {}
 var randomTrailObject = {}
 var userParameters = {
@@ -54,6 +55,7 @@ function getRandomTrail() {
     lat = (randomTrailObject.latitude)
     long = (randomTrailObject.longitude)
     console.log(hikingProjectAPIDataObject.trails[randomNum])
+
     sixHourForecast()
 
 }
@@ -187,6 +189,25 @@ function populateSelectionPage() {
 
 }
 
+
+function currentConditions() {
+    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
+    var weatherNow = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
+
+    ajax({
+        url: weatherNow,
+        method: "GET"
+    })
+        .then(function (trailWeather) {
+
+            currentWeatherObject = trailWeather
+
+            $("#weather").append("<li class='collection-item'>" + "Temp F: " + trailWeather.current.hourly.temp.toFixed() + "</li>")
+
+        })
+}
+
+
 //  FORECAST FUNCTION
 function sixHourForecast() {
     var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
@@ -214,11 +235,16 @@ function sixHourForecast() {
                     // console.log(twoHourBlock.hourly[i].humidity)
                     // console.log(timeConverter(weatherForecastObject.current.sunrise))
                     // console.log(timeConverter(weatherForecastObject.current.sunset))
+                    var newCard = $("<div>")
+                    newCard.addClass("card")
+                    newCard.attr("id", `card${i}`)
 
-                    $("#weather").append("<li class='collection-item'><h5>" + moment.unix(twoHourBlock.hourly[i].dt).format('LT') + "</h5>" + "<h5 class='imgIcon collection-item'><img src='" + iconUrl + "'</h5></li>")
-                    $("#weather").append("<li class='collection-item'>"+"Temp F: " + twoHourBlock.hourly[i].temp.toFixed()+"</li>")
-                    $("#weather").append("<li class='humidity collection-item'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</li>")
-                }
+                    $(newCard).append("<h4 class=card-title>" + (moment.unix(twoHourBlock.hourly[i].dt).format('LT') + "</h4>") + "<h5 class='imgIcon collection-item'><img src='" + iconUrl + "'</h5>" + "</div>")
+                    $(newCard).append("<div class='temp'>" + "Temp F: " + twoHourBlock.hourly[i].temp.toFixed() + "</div>")
+
+                    $(newCard).append("<div class='humidity'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</div>")
+
+                } $("#weatherCards").append(newCard)
             }
         })
 }
