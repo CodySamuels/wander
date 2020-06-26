@@ -75,7 +75,7 @@ function initMap() {
       '</div>' +
       '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
       '<div id="bodyContent">' +
-      '<h1>'+loc+'</h1>' +
+      '<p>'+loc+'</p>' +
       '<h2>'+sum+'</h2>'+
       '<h3>'+ con + '</h3>' +  
       '</div>' +
