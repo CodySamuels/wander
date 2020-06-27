@@ -274,6 +274,7 @@ function populateSelectionPage() {
     // FOR ADDING ANDREW'S WEATHER
     //$("#weather").text(randomTrailObject.name)
     sixHourForecast()
+    
 }
 
 
@@ -302,7 +303,7 @@ function sixHourForecast() {
         method: "GET"
     })
 
-        .then(function (twoHourBlock) {
+        .then(function(twoHourBlock) {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
             var iconUrl = "http://openweathermap.org/img/w/" + twoHourBlock.current.weather[0].icon + ".png";
