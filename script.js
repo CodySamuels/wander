@@ -40,8 +40,6 @@ function queryHikingProjectDataAPI() {
     })
         .then(function (hikingAPIResponse) {
             hikingProjectAPIDataObject = hikingAPIResponse
-            // getRandomTrail()
-            // initMap(queryURL)
             fisherYatesShuffle(hikingProjectAPIDataObject.trails)
             localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
             console.log(hikingProjectAPIDataObject)
@@ -58,7 +56,6 @@ function getRandomTrail() {
     console.log(hikingProjectAPIDataObject.trails[randomNum])
 
     sixHourForecast()
-
 }
 
 // GOOGLE MAPS FUNCTION FOR RANDOM PAGE
@@ -66,9 +63,9 @@ function initMap() {
     lat = randomTrailObject.latitude
     lng = randomTrailObject.longitude
     var loc = randomTrailObject.location
-    var sum = randomTrailObject.summary
-    var con = randomTrailObject.conditionDetails
-    var img = randomTrailObject.imgSqSmall
+    // var sum = randomTrailObject.summary
+    // var con = randomTrailObject.conditionDetails
+    // var img = randomTrailObject.imgSqSmall
     var myLatLng = { lat, lng };
 
     map = new google.maps.Map(document.getElementById("map"), {
@@ -81,8 +78,8 @@ function initMap() {
         '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
         '<div id="bodyContent">' +
         '<h1>' + loc + '</h1>' +
-        '<h2>' + sum + '</h2>' +
-        '<h3>' + con + '</h3>' +
+        // '<h2>' + sum + '</h2>' +
+        // '<h3>' + con + '</h3>' +
         '</div>' +
         '</div>';
     var infowindow = new google.maps.InfoWindow({
@@ -102,9 +99,9 @@ function initMapSelection() {
     lat = hikingProjectAPIDataObject.trails[99].latitude
     lng = hikingProjectAPIDataObject.trails[99].longitude
     var loc = hikingProjectAPIDataObject.trails[99].location
-    var sum = hikingProjectAPIDataObject.trails[99].summary
-    var con = hikingProjectAPIDataObject.trails[99].conditionDetails
-    var img = hikingProjectAPIDataObject.trails[99].imgSqSmall
+    // var sum = hikingProjectAPIDataObject.trails[99].summary
+    // var con = hikingProjectAPIDataObject.trails[99].conditionDetails
+    // var img = hikingProjectAPIDataObject.trails[99].imgSqSmall
     var myLatLng = { lat, lng };
 
     map = new google.maps.Map(document.getElementById("map"), {
@@ -117,8 +114,8 @@ function initMapSelection() {
         '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
         '<div id="bodyContent">' +
         '<h1>' + loc + '</h1>' +
-        '<h2>' + sum + '</h2>' +
-        '<h3>' + con + '</h3>' +
+        // '<h2>' + sum + '</h2>' +
+        // '<h3>' + con + '</h3>' +
         '</div>' +
         '</div>';
     var infowindow = new google.maps.InfoWindow({
@@ -181,12 +178,18 @@ function populateRandomPage() {
     } else if (randomTrailObject.difficulty = "dblack") {
         randomTrailObject.difficulty = "Extreme"
     }
+
     // APPENDS TO PAGE
     $("#hikeName").text(randomTrailObject.name)
     $("#difficulty").text("Difficulty: " + randomTrailObject.difficulty)
     $("#length").text("Length: " + randomTrailObject.length + " miles")
     $("#elevationGain").text("Ascent: " + randomTrailObject.ascent + " feet")
-    $("#hikeDescription").text(randomTrailObject.summary)
+
+    if (randomTrailObject.summary === "Needs Summary") {
+        $("#hikeDescription").text("No recent summary of this hike.")
+    } else {
+        $("#hikeDescription").text(randomTrailObject.summary)
+    }
 }
 
 // POPULATES THE LIST PAGE
@@ -236,12 +239,17 @@ function populateSelectionPage() {
     $("#difficulty").text("Difficulty: " + hikingProjectAPIDataObject.trails[99].difficulty)
     $("#length").text("Length: " + hikingProjectAPIDataObject.trails[99].length + " miles")
     $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet")
-    $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
+
+    if (hikingProjectAPIDataObject.trails[99].summary === "Needs Summary") {
+        $("#hikeDescription").text("No recent summary of this hike.")
+    } else {
+        $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
+    }
 
     sixHourForecast()
 }
 
-
+// LEGACY FUNCTION
 function currentConditions() {
     var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
     var weatherNow = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
@@ -255,7 +263,6 @@ function currentConditions() {
 
         })
 }
-
 
 //  FORECAST FUNCTION
 function sixHourForecast() {
@@ -318,4 +325,3 @@ function doSlideshow() {
             setTimeout(doSlideshow, 3000);
         });
 }
-
