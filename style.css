@@ -165,15 +165,6 @@ i {
     border:2px white;
 }
 
-#map {
-    height:300px;
-    width:300px;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:auto;
-}
-
 #hikeInfo, .card, #weather, .collection, .btn{ 
     opacity: 80%;
     border-radius: 1.25rem;

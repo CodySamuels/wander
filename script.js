@@ -26,13 +26,6 @@ var map;
 var lat = ""
 var long = ""
 
-//HOME PAGE SLIDESHOW
-var images = new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-5532A3D8B36F.JPG", "./assets/IMG_5925.jpg", "./assets/IMG-2722.jpg", "./assets/mistyforest.jpg", "./assets/IMG-9687.jpg", "./assets/IMG-9365.jpg");
-var nextimage = 0;
-
-// PAGE LOAD
-doSlideshow();
-
 // FUNCTIONS
 
 // QUERIES HIKING PROJECT DATA API
@@ -281,6 +274,7 @@ function populateSelectionPage() {
     // FOR ADDING ANDREW'S WEATHER
     //$("#weather").text(randomTrailObject.name)
     sixHourForecast()
+    
 }
 
 
@@ -309,7 +303,7 @@ function sixHourForecast() {
         method: "GET"
     })
 
-        .then(function (twoHourBlock) {
+        .then(function(twoHourBlock) {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
             var iconUrl = "http://openweathermap.org/img/w/" + twoHourBlock.current.weather[0].icon + ".png";
