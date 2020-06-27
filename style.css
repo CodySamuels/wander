@@ -1,8 +1,8 @@
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map {
-    height:500px;
-    width:500px;
+    height:300px;
+    width:300px;
     display:block;
     margin-left: auto;
     margin-right: auto;
@@ -19,14 +19,17 @@ h2 {
     line-height: 110%;
     margin: -0.626667rem 0 1.424rem 0;
 }
+
 h3 {
     font-size: 1.0rem;
     line-height: 110%;
     margin: -0.053333rem 0 1.168rem 0;
 }
+
 .hikeName1{
   font-size: 3.0rem;
 }
+
 body {
     display:flex;
     min-height:100vh;
@@ -39,7 +42,6 @@ main {
     justify-content:center;
     align-items:center;
     flex-direction:row;
-   
 }
 
 #hikeName {
@@ -47,6 +49,7 @@ main {
     border-radius:1.25rem;
     padding:2rem;
     opacity: 80%;
+    margin-top:3rem;
 }
 
 #hikeDescription{
@@ -64,7 +67,7 @@ main {
     background-position:center;
     background-repeat:no-repeat;
 }
-  .fadeIn {
+  .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
     animation-name: fade;
@@ -137,7 +140,7 @@ nav {
 }
 
 .listImage{
-    padding-top: 7%;
+    padding-top: 2rem;
 }
 
 .footerLinks {
@@ -161,34 +164,38 @@ i {
 .btn {
     border:2px white;
 }
-<<<<<<< HEAD
+
 #map {
     height:300px;
     width:300px;
     display:block;
     margin-left: auto;
     margin-right: auto;
+    margin-top:auto;
 }
-
-#hikeInfo {
-    border-radius:1.25rem;
-}
-=======
 
 #hikeInfo, .card, #weather, .collection, .btn{ 
     opacity: 80%;
     border-radius: 1.25rem;
 }
+
 .card{
- display: flex;
+    display: flex;
     margin: 1rem;
 }
 
 .card-title{
     padding-left: 1rem;
+    padding-right: 1rem;
+    margin:auto 0;
 }
 
 .temp, .humidity{
     padding: 1rem;
+    display:flex;
+    align-items:center;
 }
->>>>>>> dev
+
+.collection {
+    margin-top:2rem;
+}
