@@ -1,11 +1,3 @@
-// we want a random hike generated, 
-// Then recieve hike input/ first api call from var randomHike .
-// then we want the weather API to grab hikes lat and lon information 
-// After weather API gathers lat and lon, 
-// then display 6 hour forecast broken up into 3 displays
-// Display .sunrise, .sunset, .Temp, .Wind, .Description 
-
-
 // GLOBAL VARIABLE & OJBJECTS
 var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
 var randomTrailObject = JSON.parse(localStorage.getItem("randomHikeData")) || {};
@@ -22,9 +14,15 @@ var userParameters = {
     minStars: ["&minStars=", ""]
 };
 
+// GOOGLE MAPS FUNCTIONALITY
 var map;
 var lat = ""
 var long = ""
+
+//HOME PAGE SLIDESHOW
+var images = new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-5532A3D8B36F.JPG", "./assets/IMG_5925.jpg", "./assets/IMG-2722.jpg", "./assets/mistyforest.jpg", "./assets/IMG-9687.jpg", "./assets/IMG-9365.jpg");
+var nextimage = 0;
+
 
 // FUNCTIONS
 
@@ -97,22 +95,6 @@ function initMap() {
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
-
-    //       console.log(randomTrailObject); 
-
-    //       console.log(loc);
-    //       console.log(sum);
-    //       console.log(con);
-    //       console.log(response);
-    //       // $("#button").click(function () {
-    //       // })
-    //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
-    //       zoom: 12,
-    //       center: myLatLng
-    //     });
-
-    //  }); 
-    // }
 }
 
 // GOOGLE MAPS FUNCTION FOR USER SELECTION PAGE
@@ -149,22 +131,6 @@ function initMapSelection() {
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
-
-    //       console.log(randomTrailObject); 
-
-    //       console.log(loc);
-    //       console.log(sum);
-    //       console.log(con);
-    //       console.log(response);
-    //       // $("#button").click(function () {
-    //       // })
-    //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
-    //       zoom: 12,
-    //       center: myLatLng
-    //     });
-
-    //  }); 
-    // }
 }
 
 // MULTIPIN FUNCTION FOR PINING THE 10 TRAILS
@@ -198,6 +164,7 @@ function multiplepins() {
         })(marker, i));
     }
 }
+
 // POPULATES THE RANDOM PAGE
 function populateRandomPage() {
     // CONVERTS DIFFICULTY TO SOMETHING EASIER TO READ
@@ -243,7 +210,6 @@ function populateListPage() {
             window.location.href = './userSelection.html';
         })
     }
-    multiplepins()
 }
 
 // POPULATES SELECTION PAGE
@@ -271,10 +237,8 @@ function populateSelectionPage() {
     $("#length").text("Length: " + hikingProjectAPIDataObject.trails[99].length + " miles")
     $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet")
     $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
-    // FOR ADDING ANDREW'S WEATHER
-    //$("#weather").text(randomTrailObject.name)
+
     sixHourForecast()
-    
 }
 
 
@@ -288,7 +252,7 @@ function currentConditions() {
     })
         .then(function (trailWeather) {
 
-            
+
         })
 }
 
@@ -303,7 +267,7 @@ function sixHourForecast() {
         method: "GET"
     })
 
-        .then(function(twoHourBlock) {
+        .then(function (twoHourBlock) {
             weatherForecastObject = twoHourBlock
             console.log(twoHourBlock)
             var iconUrl = "http://openweathermap.org/img/w/" + twoHourBlock.current.weather[0].icon + ".png";
@@ -312,14 +276,7 @@ function sixHourForecast() {
 
             for (var i = 0; i < twoHourBlock.hourly.length; i++) {
 
-
-
-
                 if (i % 2 !== 0 && i < 6) {
-                    // console.log(twoHourBlock.hourly[i].temp.toFixed())
-                    // console.log(twoHourBlock.hourly[i].humidity)
-                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
-                    // console.log(timeConverter(weatherForecastObject.current.sunset))
                     var newCard = $("<div>")
                     newCard.addClass("card")
                     newCard.attr("id", `card${i}`)
@@ -353,17 +310,12 @@ function fisherYatesShuffle(array) {
     return array;
 }
 
-//HOME PAGE SLIDESHOW
-var images=new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-5532A3D8B36F.JPG", "./assets/IMG_5925.jpg", "./assets/IMG-2722.jpg", "./assets/mistyforest.jpg", "./assets/IMG-9687.jpg", "./assets/IMG-9365.jpg");
-            var nextimage=0;
-            doSlideshow();
-
-            function doSlideshow(){
-              if(nextimage>=images.length){nextimage=0;}
-              $('.slideshow-container')
-              .css('background-image','url("'+images[nextimage++]+'")')
-              .fadeIn(500,function(){
-                  setTimeout(doSlideshow,3000);
-              });
-          }
+function doSlideshow() {
+    if (nextimage >= images.length) { nextimage = 0; }
+    $('.slideshow-container')
+        .css('background-image', 'url("' + images[nextimage++] + '")')
+        .fadeIn(500, function () {
+            setTimeout(doSlideshow, 3000);
+        });
+}
 
