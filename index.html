@@ -12,15 +12,18 @@
 
   <!-- MATERIALIZE CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
 
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
   <!-- CUSTOM CSS -->
+  
   <link rel="stylesheet" href="style.css">
 
 </head>
 
-<body class="welcomeBody">
+<body class="slideshow-container fadeIn">
 
   <!-- ANIMATED HEADER -->
   <h1 id="welcomeBanner" class="animate__animated animate__zoomIn flow-text container center-align">WANDER</h1>
@@ -29,7 +32,7 @@
   <main class="s container welcomeContainer">
     <div class="animate__animated animate__fadeIn container welcomeButtons valign-wrapper">
       <p class="welcomeButtons"><a class="btn deep-orange darken-4 waves-effect waves-red btn-large"
-          href="random.html">I like surprises</a>
+          href="random.html">Surprise Me!!!</a>
       <p class="welcomeButtons"><a class="btn deep-orange darken-4 waves-effect waves-red btn-large" href="list.html">I
           like options</a></p>
     </div>
@@ -59,6 +62,7 @@
         <script src="script.js"></script>
         <script language="javascript">
             queryHikingProjectDataAPI();
+            doSlideshow();
         </script>
 
     </div>

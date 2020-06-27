@@ -1,13 +1,7 @@
-// we want a random hike generated, 
-// Then recieve hike input/ first api call from var randomHike .
-// then we want the weather API to grab hikes lat and lon information 
-// After weather API gathers lat and lon, 
-// then display 6 hour forecast broken up into 3 displays
-// Display .sunrise, .sunset, .Temp, .Wind, .Description 
 // GLOBAL VARIABLE & OJBJECTS
-
 var hikingProjectAPIDataObject = JSON.parse(localStorage.getItem("hikesData")) || {};
 var randomTrailObject = JSON.parse(localStorage.getItem("randomHikeData")) || {};
+var currentWeatherObject = {}
 var weatherForecastObject = {}
 var randomTrailObject = {}
 var userParameters = {
@@ -20,9 +14,17 @@ var userParameters = {
     minStars: ["&minStars=", ""]
 };
 
+// GOOGLE MAPS FUNCTIONALITY
 var map;
 var lat = ""
 var long = ""
+
+//HOME PAGE SLIDESHOW
+var images = new Array("./assets/IMG-1219.JPG", "./assets/F12DB34E-630B-4231-A0DF-5532A3D8B36F.JPG", "./assets/IMG_5925.jpg", "./assets/IMG-2722.jpg", "./assets/mistyforest.jpg", "./assets/IMG-9687.jpg", "./assets/IMG-9365.jpg");
+var nextimage = 0;
+
+
+// FUNCTIONS
 
 // QUERIES HIKING PROJECT DATA API
 function queryHikingProjectDataAPI() {
@@ -38,8 +40,6 @@ function queryHikingProjectDataAPI() {
     })
         .then(function (hikingAPIResponse) {
             hikingProjectAPIDataObject = hikingAPIResponse
-            // getRandomTrail()
-            // initMap(queryURL)
             fisherYatesShuffle(hikingProjectAPIDataObject.trails)
             localStorage.setItem("hikesData", JSON.stringify(hikingProjectAPIDataObject))
             console.log(hikingProjectAPIDataObject)
@@ -54,8 +54,8 @@ function getRandomTrail() {
     lat = (randomTrailObject.latitude)
     long = (randomTrailObject.longitude)
     console.log(hikingProjectAPIDataObject.trails[randomNum])
-    sixHourForecast()
 
+    sixHourForecast()
 }
 
 // GOOGLE MAPS FUNCTION FOR RANDOM PAGE
@@ -63,9 +63,9 @@ function initMap() {
     lat = randomTrailObject.latitude
     lng = randomTrailObject.longitude
     var loc = randomTrailObject.location
-    var sum = randomTrailObject.summary
-    var con = randomTrailObject.conditionDetails
-    var img = randomTrailObject.imgSqSmall
+    // var sum = randomTrailObject.summary
+    // var con = randomTrailObject.conditionDetails
+    // var img = randomTrailObject.imgSqSmall
     var myLatLng = { lat, lng };
 
     map = new google.maps.Map(document.getElementById("map"), {
@@ -78,8 +78,8 @@ function initMap() {
         '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
         '<div id="bodyContent">' +
         '<h1>' + loc + '</h1>' +
-        '<h2>' + sum + '</h2>' +
-        '<h3>' + con + '</h3>' +
+        // '<h2>' + sum + '</h2>' +
+        // '<h3>' + con + '</h3>' +
         '</div>' +
         '</div>';
     var infowindow = new google.maps.InfoWindow({
@@ -92,32 +92,16 @@ function initMap() {
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
-
-    //       console.log(randomTrailObject); 
-
-    //       console.log(loc);
-    //       console.log(sum);
-    //       console.log(con);
-    //       console.log(response);
-    //       // $("#button").click(function () {
-    //       // })
-    //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
-    //       zoom: 12,
-    //       center: myLatLng
-    //     });
-
-    //  }); 
-    // }
 }
 
 // GOOGLE MAPS FUNCTION FOR USER SELECTION PAGE
 function initMapSelection() {
-    lat =  hikingProjectAPIDataObject.trails[99].latitude
-    lng =  hikingProjectAPIDataObject.trails[99].longitude
-    var loc =  hikingProjectAPIDataObject.trails[99].location
-    var sum =  hikingProjectAPIDataObject.trails[99].summary
-    var con =  hikingProjectAPIDataObject.trails[99].conditionDetails
-    var img =  hikingProjectAPIDataObject.trails[99].imgSqSmall
+    lat = hikingProjectAPIDataObject.trails[99].latitude
+    lng = hikingProjectAPIDataObject.trails[99].longitude
+    var loc = hikingProjectAPIDataObject.trails[99].location
+    // var sum = hikingProjectAPIDataObject.trails[99].summary
+    // var con = hikingProjectAPIDataObject.trails[99].conditionDetails
+    // var img = hikingProjectAPIDataObject.trails[99].imgSqSmall
     var myLatLng = { lat, lng };
 
     map = new google.maps.Map(document.getElementById("map"), {
@@ -130,8 +114,8 @@ function initMapSelection() {
         '<h1 id="firstHeading" class="firstHeading">Enjoy your Hike.</h1>' +
         '<div id="bodyContent">' +
         '<h1>' + loc + '</h1>' +
-        '<h2>' + sum + '</h2>' +
-        '<h3>' + con + '</h3>' +
+        // '<h2>' + sum + '</h2>' +
+        // '<h3>' + con + '</h3>' +
         '</div>' +
         '</div>';
     var infowindow = new google.maps.InfoWindow({
@@ -144,22 +128,38 @@ function initMapSelection() {
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
+}
 
-    //       console.log(randomTrailObject); 
+// MULTIPIN FUNCTION FOR PINING THE 10 TRAILS
+function multiplepins() {
+    console.log(hikingProjectAPIDataObject);
+    var locations = []
 
-    //       console.log(loc);
-    //       console.log(sum);
-    //       console.log(con);
-    //       console.log(response);
-    //       // $("#button").click(function () {
-    //       // })
-    //     var map = new google.maps.Map(document.getElementById('hikeMap'), {
-    //       zoom: 12,
-    //       center: myLatLng
-    //     });
+    for (var i = 0; i < 10; i++) {
+        var newArr = [hikingProjectAPIDataObject.trails[i].name, hikingProjectAPIDataObject.trails[i].latitude, hikingProjectAPIDataObject.trails[i].longitude, i]
+        locations.push(newArr)
+    }
 
-    //  }); 
-    // }
+    console.log(locations);
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: new google.maps.LatLng(47.6062, -122.3321),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+        });
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
 }
 
 // POPULATES THE RANDOM PAGE
@@ -178,16 +178,24 @@ function populateRandomPage() {
     } else if (randomTrailObject.difficulty = "dblack") {
         randomTrailObject.difficulty = "Extreme"
     }
+
     // APPENDS TO PAGE
     $("#hikeName").text(randomTrailObject.name)
     $("#difficulty").text("Difficulty: " + randomTrailObject.difficulty)
     $("#length").text("Length: " + randomTrailObject.length + " miles")
     $("#elevationGain").text("Ascent: " + randomTrailObject.ascent + " feet")
-    $("#hikeDescription").text(randomTrailObject.summary)
+
+    if (randomTrailObject.summary === "Needs Summary") {
+        $("#hikeDescription").text("No recent summary of this hike.")
+    } else {
+        $("#hikeDescription").text(randomTrailObject.summary)
+    }
 }
 
 // POPULATES THE LIST PAGE
 function populateListPage() {
+    console.log(hikingProjectAPIDataObject);
+
     for (let i = 0; i < 10; i++) {
 
         // fisherYatesShuffle(hikingProjectAPIDataObject.trails)
@@ -231,10 +239,29 @@ function populateSelectionPage() {
     $("#difficulty").text("Difficulty: " + hikingProjectAPIDataObject.trails[99].difficulty)
     $("#length").text("Length: " + hikingProjectAPIDataObject.trails[99].length + " miles")
     $("#elevationGain").text("Ascent: " + hikingProjectAPIDataObject.trails[99].ascent + " feet")
-    $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
-    // FOR ADDING ANDREW'S WEATHER
-    //$("#weather").text(randomTrailObject.name)
+
+    if (hikingProjectAPIDataObject.trails[99].summary === "Needs Summary") {
+        $("#hikeDescription").text("No recent summary of this hike.")
+    } else {
+        $("#hikeDescription").text(hikingProjectAPIDataObject.trails[99].summary)
+    }
+
     sixHourForecast()
+}
+
+// LEGACY FUNCTION
+function currentConditions() {
+    var APIKey = "20139dab005aa19921ee9f2798f4a2e7"
+    var weatherNow = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely&appid=${APIKey}`
+
+    ajax({
+        url: weatherNow,
+        method: "GET"
+    })
+        .then(function (trailWeather) {
+
+
+        })
 }
 
 //  FORECAST FUNCTION
@@ -256,19 +283,17 @@ function sixHourForecast() {
 
             for (var i = 0; i < twoHourBlock.hourly.length; i++) {
 
-
-
-
                 if (i % 2 !== 0 && i < 6) {
-                    // console.log(twoHourBlock.hourly[i].temp.toFixed())
-                    // console.log(twoHourBlock.hourly[i].humidity)
-                    // console.log(timeConverter(weatherForecastObject.current.sunrise))
-                    // console.log(timeConverter(weatherForecastObject.current.sunset))
+                    var newCard = $("<div>")
+                    newCard.addClass("card")
+                    newCard.attr("id", `card${i}`)
 
-                    $("#weather").append("<li class='collection-item'><h5>" + moment.unix(twoHourBlock.hourly[i].dt).format('LT') + "</h5>" + "<h5 class='imgIcon collection-item'><img src='" + iconUrl + "'</h5></li>")
-                    $("#weather").append("<li class='collection-item'>"+"Temp F: " + twoHourBlock.hourly[i].temp.toFixed()+"</li>")
-                    $("#weather").append("<li class='humidity collection-item'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</li>")
-                }
+                    $(newCard).append("<h4 class=card-title>" + (moment.unix(twoHourBlock.hourly[i].dt).format('LT') + "</h4>") + "<h5 class='imgIcon collection-item'><img src='" + iconUrl + "'</h5>" + "</div>")
+                    $(newCard).append("<div class='temp'>" + "Temp F: " + twoHourBlock.hourly[i].temp.toFixed() + "</div>")
+
+                    $(newCard).append("<div class='humidity'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</div>")
+
+                } $("#weatherCards").append(newCard)
             }
         })
 }
@@ -290,4 +315,13 @@ function fisherYatesShuffle(array) {
     }
 
     return array;
+}
+
+function doSlideshow() {
+    if (nextimage >= images.length) { nextimage = 0; }
+    $('.slideshow-container')
+        .css('background-image', 'url("' + images[nextimage++] + '")')
+        .fadeIn(500, function () {
+            setTimeout(doSlideshow, 3000);
+        });
 }

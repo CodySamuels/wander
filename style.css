@@ -6,6 +6,28 @@
     display:block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 1.25rem;
+}
+h1 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: 1.8rem 0 1.68rem 0;
+}
+
+h2 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: -0.626667rem 0 1.424rem 0;
+}
+
+h3 {
+    font-size: 1.0rem;
+    line-height: 110%;
+    margin: -0.053333rem 0 1.168rem 0;
+}
+
+.hikeName1{
+  font-size: 3.0rem;
 }
 
 body {
@@ -22,12 +44,46 @@ main {
     flex-direction:row;
 }
 
-.welcomeBody {
-    background-image:url(https://i.imgur.com/tsHk4m4.jpg);
+#hikeName {
+    background-color:whitesmoke;
+    border-radius:1.25rem;
+    padding:2rem;
+    opacity: 80%;
+    margin-top:3rem;
+}
+
+#hikeDescription{
+    background-color:whitesmoke;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    opacity: 80%;
+    margin:2rem;
+    margin-top:3rem;
+}
+
+.slideshow-container {
+    background-image:url(assets);
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
 }
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
 
 .welcome {
     display:flex;
@@ -42,6 +98,7 @@ main {
 }
 
 .welcomeContainer {
+    flex-wrap: wrap;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -83,7 +140,7 @@ nav {
 }
 
 .listImage{
-    padding-top: 7%;
+    padding-top: 2rem;
 }
 
 .footerLinks {
@@ -106,4 +163,30 @@ i {
 
 .btn {
     border:2px white;
+}
+
+#hikeInfo, .card, #weather, .collection, .btn{ 
+    opacity: 80%;
+    border-radius: 1.25rem;
+}
+
+.card{
+    display: flex;
+    margin: 1rem;
+}
+
+.card-title{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin:auto 0;
+}
+
+.temp, .humidity{
+    padding: 1rem;
+    display:flex;
+    align-items:center;
+}
+
+.collection {
+    margin-top:2rem;
 }

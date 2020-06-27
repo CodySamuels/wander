@@ -29,7 +29,7 @@
 
     <div class="animate__animated animate__fadeIn row">
         <div class="col s12">
-            <h1 class="center-align" id="hikeName">Placeholder</h1>
+            <h1 class="center-align hikeName1" id="hikeName" >Placeholder</h1>
         </div>
     </div>
 
@@ -40,14 +40,14 @@
 
     <div class="animate__animated animate_fadeIn random row">
         <div class="valign-wrapper col s12">
-            <h5 id="hikeDescription">Placeholder</h5>
+            <h5 id="hikeDescription">No recent summary of this hike</h5>
         </div>
     </div>
 
     <main class="welcomeContainer container">
         <!--make this into it's own container with flex display for spacing-->
         <div class="animate__animated animate__fadeIn random row">
-            <div class="valign-wrapper col s6">
+            <div class="valign-wrapper col s6" id="hikeListCorners">
                 <!--specific hike info-->
                 <ul id="hikeInfo" class="collection">
                     <li id="difficulty" class="collection-item">difficulty placeholder</li>
@@ -55,14 +55,26 @@
                     <li id="elevationGain" class="collection-item">elevation gain placeholder</li>
                 </ul>
             </div>
-            <div class="valign-wrapper col s6">
+            <div class="valign-wrapper col s6" id="sunriseListCorners">
                 <ul id="weather" class="collection">
                     <!--check for table consistency when ul is dynamically created-->
                 </ul>
             </div>
+   
         </div>
     </main>
+    <div class="container">
+        
+        <div class="row">
+            <div class="col s0 m3"></div>
+            <div class="col s12 m6" id="weatherCards">
 
+
+            </div>
+            <div class="col s0 m3"></div>
+        </div>
+      
+    </div>
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
     <footer class="page-footer transparent">
         <div class="container footerSpacing">
@@ -71,10 +83,11 @@
             <a class="grey-text text-lighten-3 right" href="https://www.noaa.gov/weather">NOAA</a>
         </div>
     </footer>
+
     <!-- JAVASCRIPT -->
     <div>
 
-        <!-- MOMENT.JS -->
+        <!-- MOMENT CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
         <!-- MATERIALIZE JS -->
@@ -91,8 +104,6 @@
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9k83loTwkEX28Ez2CA0pijP3HXyttslo&callback=initMap">
             </script>
-
-        <!-- PAGE LOAD -->
         <script language="javascript">
             getRandomTrail();
             populateRandomPage();
