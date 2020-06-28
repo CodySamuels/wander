@@ -289,7 +289,7 @@ function sixHourForecast() {
                     newCard.attr("id", `card${i}`)
 
                     $(newCard).append("<h4 class=card-title>" + (moment.unix(twoHourBlock.hourly[i].dt).format('LT') + "</h4>") + "<h5 class='imgIcon collection-item'><img src='" + iconUrl + "'</h5>" + "</div>")
-                    $(newCard).append("<div class='temp'>" + "Temp F: " + twoHourBlock.hourly[i].temp.toFixed() + "</div>")
+                    $(newCard).append("<div class='temp'>" + "Temp: " + twoHourBlock.hourly[i].temp.toFixed() + " °F" + "</div>")
 
                     $(newCard).append("<div class='humidity'>" + "Humidity: " + twoHourBlock.hourly[i].humidity + "%" + "</div>")
 
