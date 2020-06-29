@@ -8,6 +8,13 @@
     margin-right: auto;
     border-radius: 1.25rem;
 }
+
+.rainbow-text {
+    background-image: linear-gradient(to left, rgb(252, 71, 252), rgb(170, 96, 223), rgb(107, 107, 235), rgb(131, 238, 131), salmon, orange, rgb(206, 82, 82));  
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
 h1 {
     font-size: 1.0rem;
     line-height: 110%;
@@ -189,4 +196,9 @@ i {
 
 .collection {
     margin-top:2rem;
+}
+
+#tryAgain{
+    display: flex;
+    justify-content: center;
 }
