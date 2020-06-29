@@ -29,7 +29,7 @@
 
     <div class="animate__animated animate__fadeIn row">
         <div class="col s12">
-            <h1 class="center-align hikeName1" id="hikeName" >Placeholder</h1>
+            <h1 class="center-align hikeName1" id="hikeName">Placeholder</h1>
         </div>
     </div>
 
@@ -60,21 +60,30 @@
                     <!--check for table consistency when ul is dynamically created-->
                 </ul>
             </div>
-   
+
         </div>
     </main>
+    <!-- Weather forecast cards -->
     <div class="container">
-        
         <div class="row">
             <div class="col s0 m3"></div>
             <div class="col s12 m6" id="weatherCards">
-
-
             </div>
             <div class="col s0 m3"></div>
         </div>
-      
     </div>
+
+    <!-- Try again button for a new hike-->
+    <div class="contain">
+        <div class="row">
+            <div class="col s3 m5"></div>
+            <div class="col s6 m2" id="tryAgain">
+                <a class="waves-effect waves-light btn" href="random.html">Try Again</a>
+            </div>
+            <div class="col s3 m5"></div>
+        </div>
+    </div>
+
     <!--Bottom nav with links to additional info, needs to span page and be fixed bottom with spaced out buttons-->
     <footer class="page-footer transparent">
         <div class="container footerSpacing">
@@ -108,7 +117,7 @@
             getRandomTrail();
             populateRandomPage();
         </script>
-        
+
     </div>
 
 </body>
