@@ -8,22 +8,22 @@ Wander is an application that makes choosing a hike easy. We take all the hard w
 ## User Story
 
 ```
-AS A nature lover
-I WANT to go to new and exciting hikes that I'm not familiar with.
-SO THAT I can have a good time with no stress.
+As a nature lover
+I want to go to new and exciting hikes that I'm not familiar with.
+So that I can have a good time with no stress.
 ```
 
 ## Acceptance Criteria
 
 ```
-GIVEN a hiking search engine that's sleek and easy to use.
-WHEN I load the page.
-THEN I am presented beautiful splash page with simple options. "I like surprises" for a random hike, and "I like options" for a list of hikes.
-WHEN I click "I LIKE SURPRISES"
-THEN I am presented with information relevant information about a random hike, with a map pointing out where the hike is.
-WHEN I click "I LIKE OPTIONS"
-THEN I am presented with a list of hike options.
-WHEN I click a hike, I am navigated to a page with more details about the hike.
+Given a hiking search engine that's sleek and easy to use.
+When I load the page.
+Then I am presented beautiful splash page with simple options. "I like surprises" for a random hike, and "I like options" for a list of hikes.
+When I click "I LIKE SURPRISES"
+Then I am presented with information relevant information about a random hike, with a map pointing out where the hike is.
+When I click "I LIKE OPTIONS"
+Then I am presented with a list of hike options.
+When I click a hike, I am navigated to a page with more details about the hike.
 
 ```
 
